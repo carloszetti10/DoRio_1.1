@@ -1,0 +1,49 @@
+/* Estilo para o fundo do menu */
+.fundoMenu{
+    -fx-background-color:linear-gradient(to bottom right, #272b3f,  #0f89ca); /* Gradiente azul */
+}
+
+.fundoPadrao {
+    -fx-background-color: linear-gradient(to bottom right, #272b3f, #0a5f8e); /* Gradiente com azul escuro */
+}
+
+.bntLogin{
+    -fx-background-color: #e9e8e8;
+    -fx-cursor:hand; /* Cursor de mão */
+}
+.bntLogin:hover{
+    -fx-background-color:#0f89ca;
+}
+/* Estilo para os botões do menu */
+
+.bntMenu {
+    -fx-background-color: transparent; /* Fundo transparente */
+    -fx-cursor: hand; /* Cursor de mão */
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 20px; /* Tamanho da fonte */
+    -fx-alignment: CENTER-LEFT; /* Alinhamento à esquerda */
+    -fx-background-color: linear-gradient(to bottom right, #272b3f, #0a5f8e); /* Gradiente azul escuro */
+    -fx-background-radius: 0px; /* Bordas arredondadas */
+    -fx-text-fill: rgb(212, 232, 248); /* Cor do texto */
+    -fx-padding: 10px 20px; /* Espaçamento interno */
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 2, 2); /* Sombra sutil */
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* Cor ao passar o mouse */
+.bntMenu:hover {
+    -fx-background-color: linear-gradient(to bottom right, #daf0fc, #0a5f8e);
+
+}
+
+/* Cor ao clicar ou focar */
+.bntMenu:pressed, .bntMenu:focused {
+    -fx-background-color: linear-gradient(to bottom right, #16202d, #08456c);
+
+}
+
+/* Efeito de sombra */
+.shadow{
+    -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.5), 6,0,0,0);
+}
