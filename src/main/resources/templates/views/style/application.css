@@ -1,0 +1,457 @@
+/* Cores Definidas Diretamente */
+.primary {
+    -fx-background-color: #107fbc;
+}
+
+.secondary {
+    -fx-background-color: #0b699d;
+}
+
+.primary-light {
+    -fx-background-color: #c2ccd1;
+}
+
+.secondary-light {
+    -fx-background-color: #ffffff;
+}
+
+/* Outros Estilos */
+.label-invisivel {
+    visibility: hidden;
+}
+
+.al-center-left {
+    -fx-alignment: center-left;
+}
+
+.sp-5 {
+    -fx-spacing: 5px;
+}
+
+.wid-50 {
+    -fx-pref-width: 50px;
+}
+
+.wid-120 {
+    -fx-pref-width: 120px;
+}
+
+.text-field, .password-field, .button, .combo-box {
+    -fx-background-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-color: #0b699d; /* Usando a cor secundária diretamente */
+}
+
+.text-area {
+    -fx-pref-height: 80px;
+    -fx-border-style: solid;
+    -fx-border-color: #0b699d; /* Usando a cor secundária diretamente */
+}
+
+.text-area,
+.text-area .scroll-pane,
+.text-area .scroll-pane .viewport,
+.text-area .scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
+.table-view {
+    -fx-padding: 0px;
+    -fx-border-style: solid;
+    -fx-border-width: 0.5;
+    -fx-border-color: grey;
+}
+
+.table-view, .table-view:focused {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header,
+.table-view .column-header-background {
+    -fx-background-color: #0b699d;
+    -fx-pref-height: 30px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff; /* Cor clara para contraste */
+}
+
+.main-frame {
+    -fx-pref-width: 1280px;
+    -fx-pref-height: 780px;
+}
+
+.side-bar {
+    -fx-padding: 10 0 0 0;
+    -fx-background-color: #107fbc;
+}
+
+.side-bar-menu {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+    -fx-pref-height: 70px;
+    -fx-pref-width: 100px;
+    -fx-min-width: 100px;
+}
+
+.side-bar-menu:hover {
+    -fx-background-color: #ffffff;
+}
+
+.side-bar-menu:hover .label, .side-bar-menu:hover SVGPath {
+    -fx-fill: #107fbc;
+    -fx-text-fill: #107fbc;
+}
+
+.side-bar-menu .label, .side-bar-menu SVGPath {
+    -fx-fill: #ffffff;
+    -fx-text-fill: #ffffff;
+}
+
+.side-bar-menu.active {
+    -fx-background-color: #0b699d;
+}
+
+.content-view {
+    -fx-pref-width: 1180px;
+    -fx-pref-height: 780px;
+    -fx-max-width: 5000px;
+    -fx-max-height: 3000px;
+}
+
+.content-view-header {
+    -fx-padding: 20 0 10 20;
+}
+
+.content-view-header > .title {
+    -fx-font-size: 32px;
+}
+
+.dialog {
+    -fx-pref-width: 600px;
+    -fx-background-color: #ffffff;
+}
+
+.dialog-icon {
+    -fx-pref-width: 160px;
+    -fx-alignment: top-center;
+    -fx-padding: 50 0 0 0;
+    -fx-background-color: #107fbc;
+}
+
+.dialog-icon SVGPath {
+    -fx-fill: #ffffff;
+}
+
+.dialog-body {
+    -fx-padding: 20px;
+    -fx-alignment: center-left;
+}
+
+.dialog-title {
+    -fx-font-size: 24px;
+}
+
+.dialog-message-box {
+    -fx-padding: 10 0 20 0;
+    -fx-spacing: 5;
+}
+
+.dialog-input-box {
+    -fx-spacing: 5;
+}
+
+.dialog-message-box > Label {
+    -fx-font-size: 18px;
+}
+
+.dialog-button-box {
+    -fx-alignment: center-right;
+    -fx-spacing: 10px;
+}
+
+.sp-10 {
+    -fx-spacing: 10;
+}
+
+.category-container {
+    -fx-padding: 0 20 20 20;
+    -fx-vgap: 20;
+    -fx-hgap: 20;
+}
+
+.category-item {
+    -fx-alignment: center-left;
+    -fx-padding: 20;
+    -fx-spacing: 20;
+    -fx-pref-width: 240px;
+    -fx-background-color: #0b699d;
+}
+
+.category-item Label {
+    -fx-font-size: 24px;
+    -fx-text-fill: #ffffff;
+}
+
+.category-item SVGPath {
+    -fx-fill: #ffffff;
+}
+
+.search-bar {
+    -fx-padding: 0 0 0 20;
+    -fx-spacing: 10;
+}
+
+.search-bar > TextField, .search-bar > ComboBox {
+    -fx-pref-width: 200px;
+    -fx-max-width: 280px;
+}
+
+.table-wrapper {
+    -fx-padding: 20;
+}
+
+.botao-salvar {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.botao-salvar:hover {
+    -fx-background-color: #45a049;
+}
+
+.botao-salvar:pressed {
+    -fx-background-color: #388E3C;
+}
+
+.botao-atualizar {
+    -fx-background-color:  #ff914d;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.botao-atualizar:hover {
+    -fx-background-color: #eb8240;
+}
+
+.botao-atualizar:pressed {
+    -fx-background-color: #d57539;
+}
+
+.botao-cancelar {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FF4444;
+    -fx-font-size: 14px;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+
+.botao-cancelar:hover {
+    -fx-text-fill: #CC0000;
+}
+
+/* Para o botão de link (nome-link) */
+.nome-link {
+    -fx-text-fill: blue;
+    -fx-text-decoration: underline;
+    -fx-cursor: hand;
+}
+
+.nome-link:hover {
+    -fx-text-fill: darkblue;
+}
+
+.white-bg {
+    -fx-background-color: #fff;
+    -fx-background-radius: 8px;
+    /* Efeito de sombra */
+
+    -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.5), 6,0,0,0);
+    -fx-background-color:#fff; /* Fundo branco */
+    -fx-background-radius:8px; /* Bordas arredondadas */
+
+}
+
+
+/* Caixa de marcação padrão */
+.checkBoxCustom .box {
+    -fx-background-color: white;
+    -fx-border-color: #555; /* Cor neutra */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px; /* Bordas arredondadas */
+    -fx-min-width: 20px;
+    -fx-min-height: 20px;
+    -fx-max-width: 20px;
+    -fx-max-height: 20px;
+}
+
+/* Quando a caixa está marcada */
+.checkBoxCustom:selected .box {
+    -fx-background-color: linear-gradient(to bottom right, #2e8b57, #3cb371); /* Verde gradiente */
+    -fx-border-color: #206a43;
+}
+
+/* Ícone de seleção dentro da caixa */
+.checkBoxCustom:selected .mark {
+    -fx-background-color: white;
+    -fx-shape: "M 4 8 L 8 12 L 16 4 L 18 6 L 8 16 L 2 10 Z"; /* Forma do check */
+}
+
+/* Efeito hover na caixa */
+.checkBoxCustom:hover .box {
+    -fx-border-color: #777; /* Cinza mais forte no hover */
+}
+
+
+.bntLaranja {
+    -fx-background-color: #f78c47; /* Cor sólida laranja */
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    -fx-alignment: CENTER;
+    -fx-background-radius: 50%;
+    -fx-min-width: 25px;
+    -fx-min-height: 25px;
+    -fx-border-width: 0;
+    -fx-max-width: 25px;
+    -fx-max-height: 25px;
+    -fx-border-radius: 50%;
+    -fx-padding: 5px;
+}
+
+.bntLaranja:hover {
+    -fx-background-color: #d3793f; /* Cor ao passar o mouse */
+}
+
+.bntVerde {
+    -fx-background-color: #4CAF50; /* Cor sólida verde */
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    -fx-alignment: CENTER;
+    -fx-background-radius: 50%;
+    -fx-min-width: 25px;
+    -fx-min-height: 25px;
+    -fx-border-width: 0;
+    -fx-max-width: 25px;
+    -fx-max-height: 25px;
+    -fx-border-radius: 50%;
+    -fx-padding: 5px;
+}
+
+.bntVerde:hover {
+    -fx-background-color: #388E3C; /* Tom mais escuro ao passar o mouse */
+}
+
+.bntVermelho {
+    -fx-background-color: #E53935; /* Cor sólida vermelha */
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    -fx-alignment: CENTER;
+    -fx-background-radius: 50%;
+    -fx-min-width: 25px;
+    -fx-border-width: 0;
+    -fx-min-height: 25px;
+    -fx-max-width: 25px;
+    -fx-max-height: 25px;
+    -fx-border-radius: 50%;
+    -fx-padding: 5px;
+}
+
+.bntVermelho:hover {
+    -fx-background-color: #C62828; /* Tom mais escuro ao passar o mouse */
+}
+
+/* Estilo do botão de fechar */
+.btnFechar {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+}
+
+/* Efeito ao passar o mouse sobre o botão de fechar */
+.btnFechar:hover {
+    -fx-text-fill: #ff0000; /* Cor vermelha para indicar que é um botão de fechar */
+}
+
+
+.botao-login {
+    -fx-background-color: #0b699d;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.botao-login:hover {
+    -fx-background-color: #084f75;
+}
+
+.botao-login:pressed {
+    -fx-background-color: #084a6b;
+}
+
+
+.painel-vermelho {
+    -fx-background-color: #ff3131;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0.5, 0, 2);
+}
+
+.painel-vermelho:hover {
+    -fx-background-color: #cc1f1f; /* Cor mais escura ao passar o mouse */
+}
+
+
+.painel-azul {
+    -fx-background-color:  #0b699d;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0.5, 0, 2);
+}
+
+.painel-azul:hover {
+    -fx-background-color: #0b5783; /* Cor mais escura ao passar o mouse */
+}
+
+.painel-laranja {
+    -fx-background-color:   #ff914d;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0.5, 0, 2);
+}
+
+.painel-laranja:hover {
+    -fx-background-color: #f68d4c; /* Cor mais escura ao passar o mouse */
+}
+
+.painel-verde {
+    -fx-background-color:    #00bf63;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0.5, 0, 2);
+}
+
+.painel-verde:hover {
+    -fx-background-color: #07a858; /* Cor mais escura ao passar o mouse */
+}
+
+
+
+
+

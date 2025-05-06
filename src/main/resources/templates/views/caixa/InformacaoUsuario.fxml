@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import com.projeto.domRio1.doRio.utils.MensagemPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="773.0" style="-fx-background-color: #d7dadb;" styleClass="painel" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.usuario.UsuarioController">
+   <children>
+      <AnchorPane layoutX="4.0" layoutY="61.0" prefHeight="417.0" prefWidth="759.0" styleClass="white-bg">
+         <children>
+            <AnchorPane fx:id="painelCadUsuario" layoutX="451.0" layoutY="11.0" prefHeight="388.0" prefWidth="294.0">
+               <children>
+                  <Label layoutX="24.0" layoutY="228.0" text="Senha: *">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="cadUsuario" layoutX="24.0" layoutY="135.0" prefHeight="27.0" prefWidth="256.0" promptText="Usuario" style="-fx-background-color: #d7dadb;" />
+                  <Label layoutX="24.0" layoutY="114.0" text="Usuario: *">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="cadNome" layoutX="24.0" layoutY="77.0" prefHeight="27.0" prefWidth="256.0" promptText="Nome" style="-fx-background-color: #d7dadb;" styleClass="dialog-input-box" />
+                  <Label layoutX="25.0" layoutY="56.0" prefHeight="17.0" prefWidth="58.0" text="Nome: *">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="24.0" layoutY="8.0" styleClass="dialog-title" text="Cadastrar Usuario">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="24.0" layoutY="355.0" mnemonicParsing="false" onAction="#cadastrarUsuario" styleClass="botao-salvar" text="CADASTRAR" />
+                  <Button layoutX="242.0" layoutY="11.0" minWidth="44.0" onAction="#fechaPainelcadUsuario" prefHeight="30.0" prefWidth="44.0" styleClass="btnFechar" text="X">
+                     <font>
+                        <Font name="Arial Black" size="15.0" />
+                     </font>
+                  </Button>
+                  <ComboBox fx:id="comboTipoUsuario" layoutX="24.0" layoutY="191.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="256.0" promptText="selecione o tipo do usuario" style="-fx-background-color: #ffffff;" />
+                  <Label layoutX="25.0" layoutY="169.0" text="Tipo Usuario: *">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="24.0" layoutY="284.0" text="Confirmar Senha: *">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="confirmarSenha" layoutX="24.0" layoutY="249.0" prefHeight="27.0" prefWidth="256.0" promptText="Confirmar senha" />
+                  <PasswordField fx:id="senhaa" layoutX="24.0" layoutY="313.0" prefHeight="27.0" prefWidth="256.0" promptText="Senha" />
+               </children>
+               <styleClass>
+                  <String fx:value="white-bg" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </AnchorPane>
+            <Button fx:id="botaoAbriCad" layoutX="25.0" layoutY="295.0" mnemonicParsing="false" onAction="#abrirpainelUsuario" prefHeight="27.0" prefWidth="153.0" styleClass="botao-salvar" text="CADASTRAR USUARIO" />
+            <VBox layoutX="25.0" layoutY="132.0" prefHeight="153.0" prefWidth="125.0">
+               <children>
+                  <Label prefHeight="33.0" prefWidth="126.0" text="Usuario:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Tipo Usuario:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <Label fx:id="nomeUsuario" layoutX="48.0" layoutY="17.0" styleClass="dialog-title" text="Nome Usuario">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <SVGPath content="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" layoutX="21.0" layoutY="23.0" />
+            <VBox layoutX="201.0" layoutY="132.0" prefHeight="153.0" prefWidth="235.0">
+               <children>
+                  <Label fx:id="usuario" prefHeight="35.0" prefWidth="107.0" text="usuario">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="tipoUsuario" prefHeight="30.0" prefWidth="135.0" text="tipo">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="-4.0" layoutY="-3.0" prefHeight="55.0" prefWidth="781.0" styleClass="side-bar">
+         <children>
+            <Button layoutX="717.0" layoutY="8.0" minWidth="44.0" onAction="#fecharJanela" prefHeight="27.0" prefWidth="44.0" styleClass="btnFechar" text="X">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="14.0" layoutY="10.0" styleClass="dialog-title" text="Usuario" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <MensagemPane fx:id="mensagemPane" layoutX="405.0" layoutY="65.0" prefHeight="35.0" prefWidth="354.0" style="-fx-background-color: transparent;" />
+   </children>
+</AnchorPane>

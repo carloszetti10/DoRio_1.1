@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="671.0" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.telaInfPessoa.TabelaInfPessoa">
+   <children>
+      <Label fx:id="codEqui" prefHeight="26.0" prefWidth="191.0" text="001" textFill="#4d4d4d">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="dataEmprestimo" prefHeight="26.0" prefWidth="200.0" text="11/12/25" textFill="#4d4d4d">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="status" alignment="CENTER" prefHeight="26.0" prefWidth="150.0" styleClass="white-bg" text="Pendente" textFill="#ff3131">
+         <font>
+            <Font name="Corbel Bold" size="20.0" />
+         </font>
+         <HBox.margin>
+            <Insets bottom="2.0" top="2.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="usuarioQueRealizou" prefHeight="26.0" prefWidth="188.0" text="Usuario x" textFill="#4d4d4d">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <HBox.margin>
+            <Insets left="50.0" />
+         </HBox.margin>
+      </Label>
+      <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="23.0" spacing="15.0">
+         <children>
+            <CheckBox fx:id="caixaMarcacao" mnemonicParsing="false" onAction="#EventoCaixa" styleClass="checkBoxCustom" stylesheets="@../style/application.css" />
+            <Label fx:id="id" prefHeight="25.0" prefWidth="6.0" styleClass="label-invisivel" text="id" textFill="#4d4d4d">
+               <font>
+                  <Font name="Cambria Bold" size="5.0" />
+               </font>
+            </Label>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </HBox>
+   </children>
+</HBox>

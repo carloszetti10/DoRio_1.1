@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="1138.0" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.telaInit.Tabelainit">
+   <children>
+      <Label fx:id="codigo" prefHeight="25.0" prefWidth="180.0" text="01" textFill="#4d4d4d">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="nomeEqui" onMouseClicked="#clickNome" prefHeight="25.0" prefWidth="180.0" styleClass="nome-link" stylesheets="@../style/application.css" text="Camera" textFill="#464646">
+         <font>
+            <Font name="Corbel Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="modelo" prefHeight="25.0" prefWidth="180.0" text="Nikon" textFill="#4d4d4d">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="tipo" prefHeight="25.0" prefWidth="180.0" text="Emprestimo" textFill="#4d4d4d">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="status" alignment="CENTER" prefHeight="25.0" prefWidth="156.0" styleClass="white-bg" text="disponivel" textFill="#2c2b2b">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <HBox.margin>
+            <Insets bottom="2.0" top="2.0" />
+         </HBox.margin>
+      </Label>
+      <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="208.0" spacing="15.0" stylesheets="@../style/application.css">
+         <children>
+            <Button fx:id="botaoEditar" mnemonicParsing="false" onAction="#editar" prefHeight="40.0" prefWidth="40.0" styleClass="bntVerde" textFill="WHITE">
+               <graphic>
+                  <SVGPath content="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" fill="WHITE" />
+               </graphic>
+            </Button>
+            <Button fx:id="botaoExcluir" mnemonicParsing="false" onAction="#excluir" prefHeight="40.0" prefWidth="40.0" styleClass="bntVermelho">
+               <graphic>
+                  <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13l6 6m0-6l-6 6" fill="WHITE" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#informacao" prefHeight="40.0" prefWidth="40.0" styleClass="bntLaranja">
+               <graphic>
+                  <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v2h-2V7zm0 4h2v6h-2v-6z" fill="WHITE" />
+               </graphic>
+            </Button>
+            <CheckBox fx:id="caixaButton" mnemonicParsing="false" onAction="#preencheuACaixa" styleClass="checkBoxCustom" stylesheets="@../style/application.css">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </CheckBox>
+            <Label fx:id="id" alignment="CENTER" prefHeight="23.0" prefWidth="35.0" styleClass="label-invisivel" text="Id" textFill="WHITE">
+               <font>
+                  <Font name="Corbel Bold" size="1.0" />
+               </font>
+            </Label>
+         </children>
+         <HBox.margin>
+            <Insets bottom="2.0" left="50.0" top="2.0" />
+         </HBox.margin>
+      </HBox>
+   </children>
+</HBox>

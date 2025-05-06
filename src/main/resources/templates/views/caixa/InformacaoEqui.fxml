@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="703.0" style="-fx-background-color: #d7dadb; -fx-background-radius: 8;" styleClass="painel" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.telaInit.InformacaoEquiController">
+   <children>
+      <AnchorPane layoutX="-2.0" layoutY="-3.0" prefHeight="53.0" prefWidth="710.0" styleClass="side-bar">
+         <children>
+            <Button layoutX="648.0" layoutY="10.0" minWidth="48.0" onAction="#fecharJanela" prefHeight="28.0" prefWidth="50.0" styleClass="btnFechar" text="X">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font></Button>
+            <Label layoutX="14.0" layoutY="10.0" styleClass="dialog-title" text="Informação" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="5.0" layoutY="59.0" prefHeight="430.0" prefWidth="694.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Label layoutX="42.0" layoutY="14.0" styleClass="dialog-title" text="Equipamentos ">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <VBox layoutX="42.0" layoutY="69.0" prefHeight="306.0" prefWidth="133.0">
+               <children>
+                  <Label text="Patrimonio:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Nome:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Modelo:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Especificação:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Tipo:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Observação:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="175.0" layoutY="69.0" prefHeight="325.0" prefWidth="268.0">
+               <children>
+                  <Label fx:id="pat" prefHeight="22.0" prefWidth="109.0" text=".">
+                     <font>
+                        <Font name="Cambria" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="nome" text=".">
+                     <font>
+                        <Font name="Cambria" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="modelo" text=".">
+                     <font>
+                        <Font name="Cambria" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ScrollPane prefHeight="23.0" prefWidth="268.0">
+                     <content>
+                        <Label fx:id="especificacao" text=".">
+                           <font>
+                              <Font name="Cambria" size="18.0" />
+                           </font>
+                        </Label>
+                     </content>
+                     <VBox.margin>
+                        <Insets bottom="13.0" />
+                     </VBox.margin>
+                  </ScrollPane>
+                  <Label fx:id="tipo" text=".">
+                     <font>
+                        <Font name="Cambria" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ScrollPane prefHeight="23.0" prefWidth="268.0">
+                     <content>
+                        <Label fx:id="obs" prefHeight="35.0" prefWidth="169.0" text="Nenhuma Observação">
+                           <font>
+                              <Font name="Cambria" size="18.0" />
+                           </font>
+                        </Label>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <Label layoutX="318.0" layoutY="24.0" text="Emprestado para:">
+               <font>
+                  <Font name="Cambria Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="emprestadoPara" layoutX="473.0" layoutY="24.0" text="Emprestado para:">
+               <font>
+                  <Font name="Cambria" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <styleClass>
+            <String fx:value="shadow" />
+            <String fx:value="white-bg" />
+         </styleClass>
+      </AnchorPane>
+   </children>
+</AnchorPane>

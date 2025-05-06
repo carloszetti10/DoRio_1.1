@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="content-view" stylesheets="@style/application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.EquipamentoController">
+   <children>
+      <HBox>
+         <children>
+            <Label styleClass="title" text="Equipamentos" />
+         </children>
+         <styleClass>
+            <String fx:value="content-view-header" />
+            <String fx:value="white-bg" />
+         </styleClass>
+         <VBox.margin>
+            <Insets bottom="2.0" left="20.0" right="20.0" top="3.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox prefHeight="781.0" prefWidth="1180.0" styleClass="table-wrapper" VBox.vgrow="ALWAYS">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="tipoEquiCombo" layoutY="3.0" onAction="#tipoEquiEventoCombo" prefHeight="27.0" prefWidth="200.0" />
+                  <ScrollPane layoutY="94.0" prefHeight="571.0" prefWidth="1140.0" styleClass="shadow">
+                     <content>
+                        <VBox fx:id="equipamentoTabela" prefHeight="59.0" prefWidth="1142.0" />
+                     </content>
+                  </ScrollPane>
+                  <HBox alignment="CENTER_LEFT" layoutY="41.0" prefHeight="51.0" prefWidth="1140.0" styleClass="side-bar">
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="180.0" text="PATRIMONIO" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="25.0" prefWidth="180.0" text="EQUIPAMENTO" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="25.0" prefWidth="180.0" text="MODELO" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="25.0" prefWidth="180.0" text="TIPO" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="statuQuant" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="180.0" text="STATUS" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#abrirCadastro" prefHeight="30.0" prefWidth="100.0" styleClass="botao-salvar">
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <SVGPath content="M22 11.5v3c0 0.828-0.672 1.5-1.5 1.5h-6.5v6.5c0 0.828-0.672 1.5-1.5 1.5h-3c-0.828 0-1.5-0.672-1.5-1.5v-6.5h-6.5c-0.828 0-1.5-0.672-1.5-1.5v-3c0-0.828 0.672-1.5 1.5-1.5h6.5v-6.5c0-0.828 0.672-1.5 1.5-1.5h3c0.828 0 1.5 0.672 1.5 1.5v6.5h6.5c0.828 0 1.5 0.672 1.5 1.5z" fill="WHITE" />
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="botao-atualizar" text="EMPRESTAR">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="890.0" prefHeight="32.0" prefWidth="250.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="23.0" prefWidth="10.0" textFill="#7c7c7c">
+                           <font>
+                              <Font name="Corbel Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="171.0" promptText="Product Name" />
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0">
+                           <graphic>
+                              <SVGPath content="M22 11.5v3c0 0.828-0.672 1.5-1.5 1.5h-6.5v6.5c0 0.828-0.672 1.5-1.5 1.5h-3c-0.828 0-1.5-0.672-1.5-1.5v-6.5h-6.5c-0.828 0-1.5-0.672-1.5-1.5v-3c0-0.828 0.672-1.5 1.5-1.5h6.5v-6.5c0-0.828 0.672-1.5 1.5-1.5h3c0.828 0 1.5 0.672 1.5 1.5v6.5h6.5c0.828 0 1.5 0.672 1.5 1.5z" fill="#3e89f2" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</VBox>

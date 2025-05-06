@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="761.0" style="-fx-background-color: #d7dadb;" styleClass="painel" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.emprestimo.FormEmprestimo">
+   <children>
+      <AnchorPane layoutX="4.0" layoutY="61.0" prefHeight="411.0" prefWidth="751.0" styleClass="white-bg">
+         <children>
+            <VBox layoutX="83.0" layoutY="92.0" prefHeight="220.0" prefWidth="157.0">
+               <children>
+                  <Label prefHeight="35.0" prefWidth="107.0" text="Solicitante:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefHeight="30.0" prefWidth="136.0" text="Equipamento:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefHeight="30.0" prefWidth="136.0" text="Patrimonio:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="248.0" layoutY="100.0" prefHeight="237.0" prefWidth="420.0">
+               <children>
+                  <ComboBox fx:id="solicitante" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="196.0" promptText="Selecione o solicitante" style="-fx-background-color: #ffffff;">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="equipamento" maxWidth="1.7976931348623157E308" onAction="#pegarEquiSelecionadoCombo" prefHeight="27.0" prefWidth="196.0" promptText="Selecione o equipamento" style="-fx-background-color: #ffffff;">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="patrimonio" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="196.0" promptText="Selecione o patrimonio do equipamento" style="-fx-background-color: #ffffff;">
+                     <VBox.margin>
+                        <Insets bottom="3.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Button mnemonicParsing="false" onAction="#addPatrimonioEmprestar" prefHeight="25.0" prefWidth="53.0" styleClass="botao-atualizar" text="ADD">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="3.0" />
+                     </VBox.margin>
+                  </Button>
+                  <ScrollPane prefHeight="55.0" prefWidth="421.0">
+                     <content>
+                        <HBox fx:id="painelEquis" prefHeight="39.0" prefWidth="428.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <Button layoutX="83.0" layoutY="333.0" mnemonicParsing="false" onAction="#cadastrarEmprestimo" prefHeight="27.0" prefWidth="91.0" styleClass="botao-salvar" text="CADASTRAR">
+               <font>
+                  <Font size="1.0" />
+               </font>
+            </Button>
+            <Button layoutX="186.0" layoutY="332.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="27.0" prefWidth="91.0" styleClass="botao-cancelar" text="Cancelar">
+               <font>
+                  <Font size="1.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="-3.0" layoutY="-3.0" prefHeight="60.0" prefWidth="767.0" styleClass="side-bar">
+         <children>
+            <Button layoutX="711.0" layoutY="11.0" minWidth="44.0" onAction="#fecharJanela" prefHeight="35.0" prefWidth="24.0" styleClass="btnFechar" text="X">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font></Button>
+            <Label fx:id="title" layoutX="14.0" layoutY="10.0" styleClass="dialog-title" text="Cadastro de Emprestimo" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <com.projeto.domRio1.doRio.utils.MensagemPane fx:id="mensagemPane" layoutX="405.0" layoutY="65.0" prefHeight="35.0" prefWidth="354.0" style="-fx-background-color: transparent;" />
+   </children>
+</AnchorPane>
