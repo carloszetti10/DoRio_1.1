@@ -1,6 +1,7 @@
 package com.projeto.domRio1.doRio.service;
 
 
+import com.projeto.domRio1.doRio.exception.AvisoException;
 import com.projeto.domRio1.doRio.exception.ErroException;
 import com.projeto.domRio1.doRio.model.*;
 import com.projeto.domRio1.doRio.repository.EquipamentoRepository;
@@ -98,8 +99,27 @@ public class EquipamentoService {
     }
 
     public void setarApagado(Equipamento equipamento){
-        equipamento.setApagado(true);
-        equipamentoRepository.save(equipamento);
+        try {
+            if(equipamento.getTipo() == TipoEquipamento.RETIRADA){
+                equipamento.setApagado(true);
+                equipamentoRepository.save(equipamento);
+            } else{
+                EquipamentoEmprestimo equipamentoEmprestimo = equiEmpestimo
+                        .buscarEquipamentoEmprestimo(equipamento.getId(), equipamento.getCodigo());
+                Emprestimo emprestimo = emprestimoService.emprestimoAberto(equipamentoEmprestimo);
+                if(emprestimo != null){
+                    throw new AvisoException("Não é possível excluir: empréstimo ativo.");
+                }else{
+                    equipamento.setApagado(true);
+                    equipamentoRepository.save(equipamento);
+                }
+            }
+        }catch (AvisoException aviso){
+            throw aviso;
+        }catch (Exception e){
+            throw new RuntimeException("Falha ao excluir equipamento!", e);
+        }
+
     }
 
     public Optional<Equipamento> findById(Long id) {

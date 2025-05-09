@@ -1,6 +1,7 @@
 package com.projeto.domRio1.doRio.controller.elementos.telaInit;
 
 import com.projeto.domRio1.doRio.controller.EquipamentoController;
+import com.projeto.domRio1.doRio.exception.AvisoException;
 import com.projeto.domRio1.doRio.model.Equipamento;
 import com.projeto.domRio1.doRio.model.EquipamentoEmprestimo;
 import com.projeto.domRio1.doRio.model.EquipamentoRetirada;
@@ -68,17 +69,25 @@ public class Tabelainit {
 
     @FXML
     void excluir(ActionEvent event) {
-        if(SessaoUsuario.getUsuario().getTipo() == TipoUsuario.Administrador ){
-            boolean confirmação = CaixaDialogo.mostrarDialogoOpcao("Confirmação", "", "Deseja realmente apagar esse equipamento?");
-            if (confirmação){
-                Optional<Equipamento> byId = equipamentoService.findById(Long.valueOf(this.id.getText()));
-                equipamentoService.setarApagado(byId.get());
-                equipamentoController.initialize();
+        try {
+            if(SessaoUsuario.getUsuario().getTipo() == TipoUsuario.Administrador ){
+                boolean confirmacao = CaixaDialogo.mostrarDialogoOpcao("Confirmação", "", "Deseja realmente apagar esse equipamento?");
+                if (confirmacao){
+                    Optional<Equipamento> byId = equipamentoService.findById(Long.valueOf(this.id.getText()));
+                    equipamentoService.setarApagado(byId.get());
+                    CaixaDialogo.mostrarDialogoSucesso("Sucesso", "", "Equipamento Apagado com sucesso!");
+                    equipamentoController.initialize();
+                }
             }
+            else {
+                CaixaDialogo.mostrarDialogoAviso("Aviso", "", "Você não tem permissão para apagar equipamento!");
+            }
+        } catch (AvisoException a){
+            CaixaDialogo.mostrarDialogoAviso("Aviso", "", a.getMessage());
+        } catch (RuntimeException e) {
+            CaixaDialogo.mostrarDialogoErro("Erro", "", e.getMessage());
         }
-        else {
-            CaixaDialogo.mostrarDialogoAviso("Aviso", "", "Você não tem permissão para apagar equipamento!");
-        }
+
     }
 
     @FXML

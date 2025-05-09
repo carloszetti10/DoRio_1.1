@@ -10,11 +10,15 @@ import com.projeto.domRio1.doRio.service.pessoa.PessoaService;
 import com.projeto.domRio1.doRio.utils.Menu;
 import com.projeto.domRio1.doRio.utils.PatrimonioCadastroEmprestimo;
 import com.projeto.domRio1.doRio.utils.SessaoUsuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -34,6 +38,8 @@ public class TelaInitController {
     private Label totalDevolucao;
     @FXML
     private VBox equipamentoTabela;
+    @FXML
+    private ListView<EquipamentoEmprestimo> equipamentoListView;
     @Getter
     @Autowired
     private EquipamentoService equipamentoService;
@@ -98,40 +104,49 @@ public class TelaInitController {
         return this.equiBaseService;
     }
     public void configurarTabela() {
-        equipamentoTabela.getChildren().clear();
-        List<EquipamentoEmprestimo> equipamentos = new ArrayList<>(equiEmpretimoService.listarTodos());
-        boolean corColuna = false;
-        for (EquipamentoEmprestimo ep : equipamentos){
+        List<EquipamentoEmprestimo> equipamentos = equiEmpretimoService.listarTodos();
+        ObservableList<EquipamentoEmprestimo> observableList = FXCollections.observableArrayList(equipamentos);
+        equipamentoListView.setItems(observableList);
 
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/templates/views/tabelas/TabelaInit.fxml"));
-            try {
-                // Carregar o layout correto baseado no tipo do FXML
-                Node node = fxmlLoader.load();  // Usando Node genérico
-                // Obtendo o controller para setar os dados
-                 Tabelainit ps = fxmlLoader.getController();
-                 ps.setData(ep);
-                 ps.meuService(this.equiEmpretimoService, this.equipamentoService, this.equipamentoController);
-                 ps.setVisibleBotao();
-                 //iniciar(ps);
-                // Alternando cores para cada linha
+        equipamentoListView.setCellFactory(list -> new ListCell<>() {
+            private FXMLLoader loader;
 
-                if (corColuna) {
-                    node.setStyle("-fx-background-color: lightgray;"); // Cor para linhas ímpares
+            @Override
+            protected void updateItem(EquipamentoEmprestimo item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
                 } else {
-                    node.setStyle("-fx-background-color: white;"); // Cor para linhas pares
-                }
+                    if (loader == null) {
+                        loader = new FXMLLoader(getClass().getResource("/templates/views/tabelas/TabelaInit.fxml"));
+                        try {
+                            setGraphic(loader.load());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            setGraphic(new Label("Erro ao carregar"));
+                            return;
+                        }
+                    }
 
-                // Alternar o valor de isEvenRow para a próxima iteração
-                corColuna = !corColuna;
-                // Adicionando o node carregado ao container (ex: VBox ou HBox)
-                equipamentoTabela.getChildren().add(node);
-                preecherTotalDevolucao();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                    Tabelainit controller = loader.getController();
+                    controller.setData(item);
+                    controller.meuService(equiEmpretimoService, equipamentoService, equipamentoController);
+                    controller.setVisibleBotao();
+
+                    // Alterna cor de fundo se quiser
+                    //if (getIndex() % 2 == 0) {
+                       // getGraphic().setStyle("-fx-background-color: white;");
+                    //} else {
+                        //getGraphic().setStyle("-fx-background-color: lightgray;");
+                   // }
+                }
             }
-        }
+        });
+
+        preecherTotalDevolucao();
     }
+
     private void saveBaseEqui(EquiBase equi) {
         equiBaseService.salva(equi);
        // category.setValue(product.getCategory());

@@ -25,7 +25,7 @@ public class DoRioApplication extends Application {
 		applicationContext.close();
 	}
 
-	public static void mai(String[] args) {
+	public static void main(String[] args) {
 		launch(args);
 	}
 
