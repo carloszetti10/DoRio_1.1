@@ -62,6 +62,8 @@ public class TelaInitController {
     EquipamentoController equipamentoController;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    EquipamentoRetiradaService equipamentoRetiradaService;
 
     @FXML
     private Label nomeUsuario;
@@ -143,7 +145,7 @@ public class TelaInitController {
 
                     Tabelainit controller = loader.getController();
                     controller.setData(item);
-                    controller.meuService(equiEmpretimoService, equipamentoService, equipamentoController);
+                    controller.meuService(equiEmpretimoService, equipamentoService, equipamentoController, equipamentoRetiradaService);
                     controller.setVisibleBotao();
 
                     // Alterna cor de fundo

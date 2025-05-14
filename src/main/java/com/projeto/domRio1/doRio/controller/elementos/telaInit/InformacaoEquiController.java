@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,7 +26,7 @@ public class InformacaoEquiController {
     private Label emprestadoPara;
 
     @FXML
-    private Label especificacao;
+    private TextArea especificacao;
 
     @FXML
     private Label modelo;
@@ -40,7 +41,7 @@ public class InformacaoEquiController {
     private Label tipo;
 
     @FXML
-    private Label obs;
+    private TextArea obs;
 
     private EquipamentoEmprestimoService service;
     private EmprestimoService emprestimoService;
@@ -100,7 +101,7 @@ public class InformacaoEquiController {
 
         if(equiBase.get().getTipo() == TipoEquipamento.EMPRESTIMO){
             organizarInfoEquiEmp(equiBase.get());
-        }else {
+        }else if (equiBase.get().getTipo() == TipoEquipamento.RETIRADA){
             organizarInfoEquiRet(equiBase.get());
         }
 
@@ -114,11 +115,13 @@ public class InformacaoEquiController {
         pat.setText(e.getEquipamentoRet().getCodigo());
         nome.setText(e.getEquipamentoRet().getEquipamentoBase().getNome());
         modelo.setText(e.getEquipamentoRet().getEquipamentoBase().getModelo());
-        if(obs.getText().isEmpty()){
             obs.setText(e.getEquipamentoRet().getObs());
-        }
+            obs.setEditable(false);
+            obs.setWrapText(true);
         tipo.setText(e.getEquipamentoRet().getTipo().toString());
         especificacao.setText(e.getEquipamentoRet().getEquipamentoBase().getEspecificacao());
+        especificacao.setEditable(false);
+        especificacao.setWrapText(true);
         textQuant.setText("Quantidade: ");
         emprestadoPara.setText(String.valueOf(e.getQuantidade()));
     }
@@ -129,11 +132,13 @@ public class InformacaoEquiController {
         pat.setText(e.getEquipamentoEmp().getCodigo());
         nome.setText(e.getEquipamentoEmp().getEquipamentoBase().getNome());
         modelo.setText(e.getEquipamentoEmp().getEquipamentoBase().getModelo());
-        if(obs.getText().isEmpty()){
-            obs.setText(e.getEquipamentoEmp().getObs());
-        }
-        tipo.setText(e.getEquipamentoEmp().getTipo().toString());
+        obs.setText(e.getEquipamentoEmp().getObs());
+        obs.setEditable(false);
+        obs.setWrapText(true);
         especificacao.setText(e.getEquipamentoEmp().getEquipamentoBase().getEspecificacao());
+        especificacao.setEditable(false);
+        especificacao.setWrapText(true);
+        tipo.setText(e.getEquipamentoEmp().getTipo().toString());
         Emprestimo emprestimo = emprestimoService.emprestimoAberto(e);
         if(emprestimo != null){
             emprestadoPara.setText(emprestimo.getPessoa().getNome());

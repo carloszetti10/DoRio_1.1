@@ -31,67 +31,46 @@ import java.util.function.Supplier;
 @Controller
 public class CadastroEquipamentoController {
 
+    private Consumer<EquiBase> saveHandler;
+    private Consumer<NumeroComEqui> equipamentoConsumer;
+    private TelaInitController telaInitController;
+
     @FXML
     private Pane painelCadEquipamento;
-
     @FXML
     private ComboBox<EquiBase> comboEqui;
-
+    @FXML
+    private ComboBox<TipoEquipamento> comboTipoEquiBase;
     @FXML
     private ComboBox<TipoEquipamento> comboTipo;
-
     @FXML
     private TextArea especificacaoEqui;
-
     @FXML
     private TextField modeloEqui;
-
     @FXML
     private TextField nomeEqui;
     @FXML
     private MensagemPane mensagemPane;
     @FXML
     private TextField patrimonio;
-
     @FXML
     private Pane painelQuantidade;
-
     @FXML
     private Spinner<Integer> quantidade;
 
-    void limpaCampoInicial(){
-        patrimonio.setText("");
-        preencherComboEqui();
-    }
-
-    void limparCadEquiBase(){
-         nomeEqui.setText("");
-         modeloEqui.setText("");
-         especificacaoEqui.setText("");
-    }
 
     @FXML
     void abrirCadEquipamento(ActionEvent event){
         painelCadEquipamento.setVisible(true);
     }
-
     @FXML
     void fecharPaneCadEqui(ActionEvent event){
         painelCadEquipamento.setVisible(false);
     }
-
     @FXML
     void verificarTipo(ActionEvent event) {
         capturarTipoAbrirQuantidade();
     }
-
-    private Consumer<EquiBase> saveHandler;
-    private Consumer<NumeroComEqui> equipamentoConsumer;
-
-    private TelaInitController telaInitController;
-
-
-
     @FXML
     void cadastrarEquiPatrimonizado(ActionEvent event) {
         try {
@@ -123,6 +102,7 @@ public class CadastroEquipamentoController {
             telaInitController.preecherTabela();
             limpaCampoInicial();
             mensagemPane.mostrarSucesso("Equipamento cadastrado com sucesso!");
+            capturarTipoAbrirQuantidade();
         } catch (ErroException erroException) {
             mensagemPane.mostrarErro(erroException.getMessage());
         } catch (AvisoException e) {
@@ -131,10 +111,42 @@ public class CadastroEquipamentoController {
         }
     }
     @FXML
+    void cadastrarEquipamento(ActionEvent event) {
+        try {
+            String nome = nomeEqui.getText();
+            String modelo = modeloEqui.getText();
+            String esp = especificacaoEqui.getText();
+            TipoEquipamento tipo = comboTipoEquiBase.getValue();
+            // Valida os campos antes de tentar salvar
+            if (nome == null || nome.trim().isEmpty() || modelo == null || modelo.trim().isEmpty() || tipo == null) {
+                throw new AvisoException("Nome, Modelo e Tipo são campos obrigatórios.");
+            }
+            // Criando o objeto e definindo os valores
+            EquiBase e = new EquiBase();
+            e.setNome(nome);
+            e.setModelo(modelo);
+            e.setTipo(tipo);
+            e.setEspecificacao(esp);
+            // Aceitando o objeto para o próximo processamento (como salvar)
+            saveHandler.accept(e);
+            // Se tudo ocorrer bem, exibe a mensagem de sucesso
+            mensagemPane.mostrarSucesso("Equipamento cadastrado com sucesso!");
+            capturarTipoAbrirQuantidade();
+            limparCadEquiBase();
+        } catch (AvisoException e) {
+            // Exibe um aviso se os campos estiverem inválidos
+            mensagemPane.mostrarAviso(e.getMessage());
+        } catch (ErroException erroException) {
+            // Exibe um erro genérico caso algum erro não específico aconteça
+            mensagemPane.mostrarErro(erroException.getMessage());
+        }
+    }
+    @FXML
     void fecharJanela(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
+
     public static void addNew(Consumer<NumeroComEqui> equipamentoConsumer, Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui, Supplier<List<EquiBase>> listaEquipamento,TelaInitController telaInit) {
         abrir(null, equipamentoConsumer, saveHandler, tipoEqui,listaEquipamento,telaInit);
     }
@@ -156,25 +168,26 @@ public class CadastroEquipamentoController {
         }
     }
 
-    void preencherComboEqui(){
+    void preencherComboEqui(List<EquiBase> lista){
         comboEqui.getItems().clear();
-        EquiBaseService equiBaseService = telaInitController.returnBaseService();
-        List<EquiBase> equiBases = equiBaseService.buscarTodos();
-        if (equiBases != null) {
-            comboEqui.getItems().addAll(equiBases);
+        if (lista != null) {
+            comboEqui.getItems().addAll(lista);
         }
     }
 
+    void preencherComboTipoEqui(){
+        comboTipoEquiBase.getItems().clear();
+        comboTipoEquiBase.getItems().addAll(TipoEquipamento.values());
+    }
 
-
-    //List<EquiBase> equipamentos;
     private void init( EquiBase e,Consumer<NumeroComEqui> equipamentoConsumer,Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui, Supplier<List<EquiBase>> listaEquipamento,TelaInitController telaInit) {
 
         this.telaInitController = telaInit;
         this.equipamentoConsumer = equipamentoConsumer;
         this.saveHandler = saveHandler;
         comboTipo.getItems().addAll(tipoEqui);
-        preencherComboEqui();
+        preencherComboEqui(List.of());
+        preencherComboTipoEqui();
         comboEqui.setConverter(new StringConverter<EquiBase>() {
             @Override
             public String toString(EquiBase equiBase) {
@@ -234,41 +247,26 @@ public class CadastroEquipamentoController {
         });
     }
 
-    @FXML
-    void cadastrarEquipamento(ActionEvent event) {
-        try {
-            String nome = nomeEqui.getText();
-            String modelo = modeloEqui.getText();
-            String esp = especificacaoEqui.getText();
-            // Valida os campos antes de tentar salvar
-            if (nome == null || nome.trim().isEmpty() || modelo == null || modelo.trim().isEmpty()) {
-                throw new AvisoException("Nome e Modelo são campos obrigatórios.");
-            }
-            // Criando o objeto e definindo os valores
-            EquiBase e = new EquiBase();
-            e.setNome(nome);
-            e.setModelo(modelo);
-            e.setEspecificacao(esp);
-            // Aceitando o objeto para o próximo processamento (como salvar)
-            saveHandler.accept(e);
-            // Se tudo ocorrer bem, exibe a mensagem de sucesso
-            mensagemPane.mostrarSucesso("Equipamento cadastrado com sucesso!");
-            preencherComboEqui();
-            limparCadEquiBase();
-        } catch (AvisoException e) {
-            // Exibe um aviso se os campos estiverem inválidos
-            mensagemPane.mostrarAviso(e.getMessage());
-        } catch (ErroException erroException) {
-            // Exibe um erro genérico caso algum erro não específico aconteça
-            mensagemPane.mostrarErro(erroException.getMessage());
+    void capturarTipoAbrirQuantidade(){
+        EquiBaseService equiBaseService = telaInitController.returnBaseService();
+        List<EquiBase> equiBases = equiBaseService.buscarTodos();
+        if(comboTipo.getValue() == TipoEquipamento.RETIRADA){
+            painelQuantidade.setVisible(true);
+            preencherComboEqui(equiBaseService.buscarTodosEquiTipo(TipoEquipamento.RETIRADA));
+        }else if (comboTipo.getValue() == TipoEquipamento.EMPRESTIMO){
+            painelQuantidade.setVisible(false);
+            preencherComboEqui(equiBaseService.buscarTodosEquiTipo(TipoEquipamento.EMPRESTIMO));
         }
     }
 
-    void capturarTipoAbrirQuantidade(){
-        if(comboTipo.getValue() == TipoEquipamento.RETIRADA){
-            painelQuantidade.setVisible(true);
-        }else {
-            painelQuantidade.setVisible(false);
-        }
+    void limpaCampoInicial(){
+        patrimonio.setText("");
+        preencherComboEqui(List.of());
+    }
+
+    void limparCadEquiBase(){
+        nomeEqui.setText("");
+        modeloEqui.setText("");
+        especificacaoEqui.setText("");
     }
 }

@@ -22,6 +22,8 @@ public class EquiBase {
     private String modelo;
     private String especificacao;
     private Integer quantidade;
+    @Enumerated(EnumType.STRING)
+    private TipoEquipamento tipo;
 
     @OneToMany(mappedBy = "equipamentoBase")
     private List<Equipamento> equipamentos = new ArrayList<>();

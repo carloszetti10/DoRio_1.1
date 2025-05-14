@@ -29,7 +29,7 @@ public class Config {
             u.setUsuarioLogar("adm");
             u.setSenha("adm");
             u.setTipo(TipoUsuario.Administrador);
-            //cadastrarEquipamentosEmprestimo();
+            cadastrarEquipamentosEmprestimo();
 
             Optional<Usuario> usuario = service.getUsuario(u.getUsuarioLogar());
             if (!usuario.isPresent()){
@@ -59,7 +59,7 @@ public class Config {
 
         List<EquipamentoEmprestimo> lista = new ArrayList<>();
 
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 20; i++) {
             EquiBase equipamento = equipamentosBase.getFirst(); // reutiliza os existentes
             Equipamento equipamento1 = new Equipamento();
             equipamento1.setTipo(TipoEquipamento.EMPRESTIMO);

@@ -22,7 +22,7 @@ public class EquiBaseService {
 
     public void salva(EquiBase equi) {
         try {
-            Optional<EquiBase> byNomeAndModelo = repository.findByNomeAndModelo(equi.getNome(), equi.getModelo());
+            Optional<EquiBase> byNomeAndModelo = repository.findByNomeContainingIgnoreCaseAndModeloContainingIgnoreCaseAndTipo(equi.getNome(), equi.getModelo(), equi.getTipo());
 
             if (byNomeAndModelo.isPresent()) {
                 throw new AvisoException("Equipamento já existe!");
@@ -48,5 +48,9 @@ public class EquiBaseService {
 
     public Optional<EquiBase> buscarPorId(Long id){
         return repository.findById(id);
+    }
+
+    public List<EquiBase> buscarTodosEquiTipo(TipoEquipamento tipo) {
+        return repository.findAllByTipo(tipo);
     }
 }

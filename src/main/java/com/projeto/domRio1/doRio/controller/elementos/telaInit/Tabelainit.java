@@ -149,15 +149,13 @@ public class Tabelainit {
         }
     }
 
-    public void meuService(EquipamentoEmprestimoService equiEmpretimoService, EquipamentoService equipamentoService, EquipamentoController equipamentoController) {
+    public void meuService(EquipamentoEmprestimoService equiEmpretimoService, EquipamentoService equipamentoService, EquipamentoController equipamentoController, EquipamentoRetiradaService equiRetiradaService) {
         this.equiEmpretimoService = equiEmpretimoService;
         this.equipamentoService = equipamentoService;
         this.equipamentoController = equipamentoController;
+        this.equiRetiradaService = equiRetiradaService;
     }
 
-    public void meuServiceRetirada(EquipamentoRetiradaService equipamentoRetiradaService) {
-        this.equiRetiradaService = equipamentoRetiradaService;
-    }
 
     public void setDataReirada(EquipamentoRetirada ep) {
         id.setText(String.valueOf(ep.getId()));

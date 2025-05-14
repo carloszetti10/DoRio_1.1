@@ -206,7 +206,7 @@ public class EquipamentoController {
 
                         Tabelainit ps = loader.getController();
                         ps.setData(item);
-                        ps.meuService(equiEmpretimoService, equipamentoService, controller);
+                        ps.meuService(equiEmpretimoService, equipamentoService, controller, equipamentoRetiradaService);
                         //ps.setVisibleBotao();
 
                         setGraphic(graphic);
@@ -240,7 +240,7 @@ public class EquipamentoController {
 
                         Tabelainit ps = loader.getController();
                         ps.setDataReirada(item);
-                        ps.meuService(equiEmpretimoService, equipamentoService, controller);
+                        ps.meuService(equiEmpretimoService, equipamentoService, controller, equipamentoRetiradaService);
                         //ps.setVisibleBotao();
 
                         setGraphic(graphic);
