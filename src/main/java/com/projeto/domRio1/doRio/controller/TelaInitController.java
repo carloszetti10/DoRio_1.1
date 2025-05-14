@@ -16,18 +16,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +37,8 @@ import java.util.Set;
 public class TelaInitController {
     @FXML
     private Label totalDevolucao;
+    @FXML
+    private Label totalEmpHoje;
     @FXML
     private VBox equipamentoTabela;
     @FXML
@@ -65,8 +68,14 @@ public class TelaInitController {
 
     @FXML
     public void initialize() {
-        configurarTabela();
+        iniciarTela();
+    }
+
+    public void iniciarTela(){
+        configurarTabela(equiEmpretimoService.listarTodos());
         nomeUsuario.setText(SessaoUsuario.getUsuario().getNome());
+        preencherComboPesquisa();
+        setarQuantTotalEmpHoje();
     }
 
     @FXML
@@ -103,8 +112,11 @@ public class TelaInitController {
     public EquiBaseService returnBaseService(){
         return this.equiBaseService;
     }
-    public void configurarTabela() {
-        List<EquipamentoEmprestimo> equipamentos = equiEmpretimoService.listarTodos();
+    public void preecherTabela(){
+        configurarTabela(equiEmpretimoService.listarTodos());
+        preencherComboPesquisa();
+    }
+    public void configurarTabela(List<EquipamentoEmprestimo> equipamentos) {
         ObservableList<EquipamentoEmprestimo> observableList = FXCollections.observableArrayList(equipamentos);
         equipamentoListView.setItems(observableList);
 
@@ -134,7 +146,7 @@ public class TelaInitController {
                     controller.meuService(equiEmpretimoService, equipamentoService, equipamentoController);
                     controller.setVisibleBotao();
 
-                    // Alterna cor de fundo se quiser
+                    // Alterna cor de fundo
                     //if (getIndex() % 2 == 0) {
                        // getGraphic().setStyle("-fx-background-color: white;");
                     //} else {
@@ -149,8 +161,6 @@ public class TelaInitController {
 
     private void saveBaseEqui(EquiBase equi) {
         equiBaseService.salva(equi);
-       // category.setValue(product.getCategory());
-       //search();
     }
     private void salveEquipamento(NumeroComEqui equi){
         equipamentoService.salvar(equi.getEquipamento(), equi.getNumero());
@@ -160,4 +170,51 @@ public class TelaInitController {
         List<Emprestimo> emprestimos = emprestimoService.emprestimosPendentes();
         totalDevolucao.setText(String.valueOf(emprestimos.size()));
     }
+
+    @FXML
+    private TextField campoPesquisa;
+    @FXML
+    void pesquisar(KeyEvent event) {
+       metodoPesquisar();
+    }
+    @FXML
+    private ComboBox<EquiBase> comboPequisa;
+    @FXML
+    void pesquisarPorCombo(ActionEvent event) {
+        metodoPesquisar();
+    }
+    void preencherComboPesquisa(){
+        List<EquiBase> equis = equiBaseService.buscarTodos();
+        comboPequisa.getItems().clear();
+        comboPequisa.getItems().addAll(equis);
+        comboPequisa.setConverter(new StringConverter<EquiBase>() {
+            @Override
+            public String toString(EquiBase e) {
+                return (e != null) ? e.getNome() + " " + e.getModelo() : "";
+            }
+            @Override
+            public EquiBase fromString(String string) {
+                return null;
+            }
+        });
+    }
+    void metodoPesquisar(){
+        if(campoPesquisa.getText() == null && campoPesquisa.getText().trim().isEmpty()){
+            configurarTabela(equiEmpretimoService.listarTodos());
+        }else{
+            List<EquipamentoEmprestimo> pesquisar = equiEmpretimoService.pesquisar(campoPesquisa.getText(), comboPequisa.getValue());
+            configurarTabela(pesquisar);
+        }
+    }
+    void setarQuantTotalEmpHoje(){
+        List<Emprestimo> emprestimos = emprestimoService.listarEmpPorData(LocalDate.now());
+        totalEmpHoje.setText(String.valueOf(emprestimos.size()));
+    }
+
+    @FXML
+    void painelAbrirEmprestimoData(MouseEvent event) {
+        mainController.loadView(Menu.Emprestimo);
+        emprestimoController.abrirEmprestimoTelaInicial(emprestimoService.listarEmpPorData(LocalDate.now()));
+    }
+
 }

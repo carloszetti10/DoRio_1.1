@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1143.0" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.telaPessoa.TabelaPessoa">
+<HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1100.0" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.telaPessoa.TabelaPessoa">
    <children>
       <Label fx:id="id" prefHeight="25.0" prefWidth="6.0" styleClass="label-invisivel" text="id" textFill="#4d4d4d">
          <font>
@@ -19,7 +19,7 @@
             <Font name="Cambria Bold" size="20.0" />
          </font>
          <HBox.margin>
-            <Insets left="5.0" />
+            <Insets />
          </HBox.margin>
       </Label>
       <Label fx:id="departamento" prefHeight="25.0" prefWidth="300.0" text="Departamento" textFill="#4d4d4d">
@@ -32,7 +32,7 @@
             <Font name="Cambria Bold" size="20.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="125.0" spacing="15.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="142.0" spacing="15.0">
          <children>
             <Button mnemonicParsing="false" onAction="#editar" prefHeight="40.0" prefWidth="40.0" styleClass="bntVerde" textFill="WHITE">
                <graphic>
@@ -42,11 +42,6 @@
             <Button mnemonicParsing="false" onAction="#informacao" prefHeight="40.0" prefWidth="40.0" styleClass="bntLaranja">
                <graphic>
                   <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v2h-2V7zm0 4h2v6h-2v-6z" fill="WHITE" />
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#excluir" prefHeight="40.0" prefWidth="40.0" styleClass="bntVermelho">
-               <graphic>
-                  <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13l6 6m0-6l-6 6" fill="WHITE" />
                </graphic>
             </Button>
          </children>

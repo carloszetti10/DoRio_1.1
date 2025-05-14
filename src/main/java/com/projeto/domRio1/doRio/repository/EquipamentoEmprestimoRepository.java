@@ -17,5 +17,20 @@ public interface EquipamentoEmprestimoRepository extends JpaRepository<Equipamen
 
 
     List<EquipamentoEmprestimo> findAllByEquipamentoEmpApagadoFalse();
+
+    List<EquipamentoEmprestimo> findByEquipamentoEmpEquipamentoBase(EquiBase value);
+
+
+    List<EquipamentoEmprestimo> findByEquipamentoEmpEquipamentoBaseAndEquipamentoEmpCodigo(EquiBase value, String text);
+
+    List<EquipamentoEmprestimo> findByEquipamentoEmpCodigoContainingIgnoreCase(String text);
+
+    List<EquipamentoEmprestimo> findByEquipamentoEmpEquipamentoBaseAndEquipamentoEmpApagadoFalse(EquiBase value);
+
+    List<EquipamentoEmprestimo> findByEquipamentoEmpCodigoContainingIgnoreCaseAndEquipamentoEmpApagadoFalse(String text);
+
+    List<EquipamentoEmprestimo> findByEquipamentoEmpEquipamentoBaseAndEquipamentoEmpCodigoAndEquipamentoEmpApagadoFalse(EquiBase value, String text);
+
+    //List<EquipamentoEmprestimo> findByEquipamentoEmpEquipamentoBaseAndApagadoFalse(EquiBase value);
 }
 

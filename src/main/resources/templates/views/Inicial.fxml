@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -42,7 +43,7 @@
                      <children>
                         <AnchorPane prefHeight="84.0" prefWidth="63.0" styleClass="painel-laranja">
                            <children>
-                              <Label layoutX="9.0" layoutY="2.0" prefHeight="25.0" prefWidth="182.0" text="Emprestimos " textFill="WHITE">
+                              <Label layoutX="9.0" layoutY="2.0" prefHeight="25.0" prefWidth="182.0" text="Retiradas de hoje" textFill="WHITE">
                                  <font>
                                     <Font name="Cambria Bold" size="18.0" />
                                  </font>
@@ -52,7 +53,7 @@
                                     <Font name="Cambria Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="62.0" layoutY="41.0" prefHeight="25.0" prefWidth="10.0" text="0" textFill="WHITE">
+                              <Label layoutX="62.0" layoutY="41.0" prefHeight="27.0" prefWidth="122.0" text="0" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -61,14 +62,14 @@
                         </AnchorPane>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <VBox alignment="CENTER" onMouseClicked="#painelAbrirEmprestimoData" prefHeight="100.0" prefWidth="200.0">
                      <HBox.margin>
                         <Insets right="90.0" />
                      </HBox.margin>
                      <children>
                         <AnchorPane prefHeight="84.0" prefWidth="63.0" styleClass="painel-verde">
                            <children>
-                              <Label layoutX="9.0" layoutY="2.0" prefHeight="25.0" prefWidth="182.0" text="Emprestimos Abertos" textFill="WHITE">
+                              <Label layoutX="9.0" layoutY="2.0" prefHeight="25.0" prefWidth="182.0" text="Emprestimos de hoje" textFill="WHITE">
                                  <font>
                                     <Font name="Cambria Bold" size="18.0" />
                                  </font>
@@ -78,7 +79,7 @@
                                     <Font name="Cambria Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="62.0" layoutY="41.0" prefHeight="25.0" prefWidth="10.0" text="0" textFill="WHITE">
+                              <Label fx:id="totalEmpHoje" layoutX="62.0" layoutY="41.0" prefHeight="27.0" prefWidth="122.0" text="0" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -101,7 +102,7 @@
                                     <Font name="Cambria Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="totalDevolucao" layoutX="62.0" layoutY="41.0" prefHeight="25.0" prefWidth="10.0" text="0" textFill="WHITE">
+                              <Label fx:id="totalDevolucao" layoutX="62.0" layoutY="41.0" prefHeight="27.0" prefWidth="122.0" text="0" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -143,7 +144,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label prefHeight="25.0" prefWidth="180.0" text="EQUIPAMENTOo" textFill="WHITE">
+                              <Label prefHeight="25.0" prefWidth="180.0" text="EQUIPAMENTO" textFill="WHITE">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -175,28 +176,18 @@
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="5.0" />
                                  </HBox.margin>
-                                 <font>
-                                    <Font name="Arial Black" size="12.0" />
-                                 </font>
                               </Button>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="1135.0">
                            <children>
+                              <ComboBox fx:id="comboPequisa" onAction="#pesquisarPorCombo" prefHeight="27.0" prefWidth="234.0" promptText="Equipamento" />
                               <Label alignment="CENTER" prefHeight="23.0" prefWidth="10.0" textFill="#7c7c7c">
                                  <font>
                                     <Font name="Corbel Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="32.0" prefWidth="171.0" promptText="Product Name" />
-                              <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0">
-                                 <graphic>
-                                    <SVGPath content="M22 11.5v3c0 0.828-0.672 1.5-1.5 1.5h-6.5v6.5c0 0.828-0.672 1.5-1.5 1.5h-3c-0.828 0-1.5-0.672-1.5-1.5v-6.5h-6.5c-0.828 0-1.5-0.672-1.5-1.5v-3c0-0.828 0.672-1.5 1.5-1.5h6.5v-6.5c0-0.828 0.672-1.5 1.5-1.5h3c0.828 0 1.5 0.672 1.5 1.5v6.5h6.5c0.828 0 1.5 0.672 1.5 1.5z" fill="#3e89f2" />
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Button>
+                              <TextField fx:id="campoPesquisa" onKeyTyped="#pesquisar" prefHeight="32.0" prefWidth="171.0" promptText="Pat Equipamento" />
                            </children>
                         </HBox>
                         <ListView fx:id="equipamentoListView" layoutY="93.0" prefHeight="529.0" prefWidth="1141.0" />

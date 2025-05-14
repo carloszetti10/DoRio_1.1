@@ -95,8 +95,9 @@ public class FormEmprestimo {
             listaPatrimonio.removeAll(listaPatrimonio);
             preencherEquipamento();
             configurarTabela();
-            telaInitController.configurarTabela();
-            emprestimoController.configurarTabela();
+            //telaInitController.preecherTabela();
+            telaInitController.iniciarTela();
+            emprestimoController.configurarTabela(emprestimoService.todosEmprestimo());
         } catch (ErroException erroException) {
             mensagemPane.mostrarErro(erroException.getMessage());
         } catch (AvisoException e) {
@@ -113,7 +114,7 @@ public class FormEmprestimo {
 
     @FXML
     void fecharJanela(ActionEvent event) {
-        telaInitController.configurarTabela();
+        telaInitController.preecherTabela();
         listaPatrimonio.removeAll(listaPatrimonio);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -199,7 +200,7 @@ public class FormEmprestimo {
             }
             @Override
             public EquiBase fromString(String string) {
-                return null; // Não necessário neste caso
+                return null;
             }
         });
     }

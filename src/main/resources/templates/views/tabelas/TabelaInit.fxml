@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="1138.0" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.telaInit.Tabelainit">
+<HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="1138.0" stylesheets="@../style/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.elementos.telaInit.Tabelainit">
    <children>
       <Label fx:id="codigo" prefHeight="25.0" prefWidth="180.0" text="01" textFill="#4d4d4d">
          <font>
@@ -72,6 +72,11 @@
             <Label fx:id="id" alignment="CENTER" prefHeight="23.0" prefWidth="35.0" styleClass="label-invisivel" text="Id" textFill="WHITE">
                <font>
                   <Font name="Corbel Bold" size="1.0" />
+               </font>
+            </Label>
+            <Label fx:id="idEquiBase" prefHeight="18.0" prefWidth="20.0" text="Label">
+               <font>
+                  <Font size="1.0" />
                </font>
             </Label>
          </children>

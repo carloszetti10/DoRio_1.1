@@ -87,7 +87,7 @@ public class CadastroEquipamentoController {
 
     private Consumer<EquiBase> saveHandler;
     private Consumer<NumeroComEqui> equipamentoConsumer;
-    private EquiBase equiBase;
+
     private TelaInitController telaInitController;
 
 
@@ -119,8 +119,8 @@ public class CadastroEquipamentoController {
             // Criando o objeto NumeroComEqui e aceitando
             NumeroComEqui numeroComEqui = new NumeroComEqui(eq, this.quantidade.getValue());
             equipamentoConsumer.accept(numeroComEqui);
-            // Exibindo mensagem de sucesso diretamente
-            telaInitController.configurarTabela();
+            
+            telaInitController.preecherTabela();
             limpaCampoInicial();
             mensagemPane.mostrarSucesso("Equipamento cadastrado com sucesso!");
         } catch (ErroException erroException) {
@@ -169,7 +169,7 @@ public class CadastroEquipamentoController {
 
     //List<EquiBase> equipamentos;
     private void init( EquiBase e,Consumer<NumeroComEqui> equipamentoConsumer,Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui, Supplier<List<EquiBase>> listaEquipamento,TelaInitController telaInit) {
-        this.equiBase = e;
+
         this.telaInitController = telaInit;
         this.equipamentoConsumer = equipamentoConsumer;
         this.saveHandler = saveHandler;

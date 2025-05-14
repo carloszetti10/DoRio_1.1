@@ -14,4 +14,5 @@ public interface EquipamentoRepository extends JpaRepository<Equipamento, Long> 
 
     Equipamento findByCodigoAndEquipamentoBaseAndTipo(String patrimonioValue, EquiBase equipamentoValue, TipoEquipamento tipoEquipamento);
 
+    List<Equipamento> findAllByTipo(TipoEquipamento tipo);
 }

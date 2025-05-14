@@ -1,9 +1,10 @@
 package com.projeto.domRio1.doRio.controller.elementos.telaInit;
 
-import com.projeto.domRio1.doRio.model.Emprestimo;
-import com.projeto.domRio1.doRio.model.EquipamentoEmprestimo;
+import com.projeto.domRio1.doRio.model.*;
 import com.projeto.domRio1.doRio.service.EmprestimoService;
 import com.projeto.domRio1.doRio.service.EquipamentoEmprestimoService;
+import com.projeto.domRio1.doRio.service.EquipamentoRetiradaService;
+import com.projeto.domRio1.doRio.service.EquipamentoService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,15 +42,15 @@ public class InformacaoEquiController {
     @FXML
     private Label obs;
 
-    @Autowired
     private EquipamentoEmprestimoService service;
-    @Autowired
     private EmprestimoService emprestimoService;
+    EquipamentoRetiradaService equipamentoRetiradaService;
+    EquipamentoService equipamentoService;
     private Long id;
 
-    public static void addNew(String text, EquipamentoEmprestimoService equiEmpretimoService) {
+    public static void addNew(String text, EquipamentoEmprestimoService equiEmpretimoService, EquipamentoRetiradaService equipamentoRetiradaService, EquipamentoService equipamentoService) {
         Long id = converterId(text);
-        abrir(id, equiEmpretimoService);
+        abrir(id, equiEmpretimoService, equipamentoRetiradaService, equipamentoService);
     }
 
     public static Long converterId(String text) {
@@ -68,7 +69,7 @@ public class InformacaoEquiController {
     }
 
 
-    public static void abrir(Long id, EquipamentoEmprestimoService equiEmpretimoService ) {
+    public static void abrir(Long id, EquipamentoEmprestimoService equiEmpretimoService, EquipamentoRetiradaService equipamentoRetiradaService, EquipamentoService equipamentoService) {
         try {
             Stage stage = new Stage(StageStyle.UNDECORATED);
             FXMLLoader loader = new FXMLLoader(CadastroEquipamentoController.class.getResource("/templates/views/caixa/InformacaoEqui.fxml"));
@@ -76,7 +77,7 @@ public class InformacaoEquiController {
             stage.initModality(Modality.APPLICATION_MODAL);
 
             InformacaoEquiController controller = loader.getController();
-            controller.init(id, equiEmpretimoService);
+            controller.init(id, equiEmpretimoService, equipamentoRetiradaService, equipamentoService);
 
 
             stage.show();
@@ -85,31 +86,61 @@ public class InformacaoEquiController {
         }
     }
 
-    private void init(Long id, EquipamentoEmprestimoService equiEmpretimoService) {
+    private void init(Long id, EquipamentoEmprestimoService equiEmpretimoService, EquipamentoRetiradaService equipamentoRetiradaService, EquipamentoService equipamentoService) {
         this.id = id;
         this.service = equiEmpretimoService;
         this.emprestimoService = service.returnEmprestimoService();
+        this.equipamentoRetiradaService = equipamentoRetiradaService;
+        this.equipamentoService = equipamentoService;
         organiarInfo();
     }
 
     void organiarInfo(){
-        Optional<EquipamentoEmprestimo> e = service.findById(this.id);
-        pat.setText(e.get().getEquipamentoEmp().getCodigo());
-        nome.setText(e.get().getEquipamentoEmp().getEquipamentoBase().getNome());
-        modelo.setText(e.get().getEquipamentoEmp().getEquipamentoBase().getModelo());
-        if(obs.getText().isEmpty()){
-            obs.setText(e.get().getEquipamentoEmp().getObs());
+        Optional<Equipamento> equiBase = equipamentoService.findById(id);
+
+        if(equiBase.get().getTipo() == TipoEquipamento.EMPRESTIMO){
+            organizarInfoEquiEmp(equiBase.get());
+        }else {
+            organizarInfoEquiRet(equiBase.get());
         }
-        tipo.setText(e.get().getEquipamentoEmp().getTipo().toString());
-        especificacao.setText(e.get().getEquipamentoEmp().getEquipamentoBase().getEspecificacao());
-        Emprestimo emprestimo = emprestimoService.emprestimoAberto(e.get());
+
+    }
+
+    @FXML
+    private Label textQuant;
+
+    private void organizarInfoEquiRet(Equipamento equi) {
+        EquipamentoRetirada e = equipamentoRetiradaService.buscarEquipamentoRetirada(equi.getId(), equi.getCodigo());
+        pat.setText(e.getEquipamentoRet().getCodigo());
+        nome.setText(e.getEquipamentoRet().getEquipamentoBase().getNome());
+        modelo.setText(e.getEquipamentoRet().getEquipamentoBase().getModelo());
+        if(obs.getText().isEmpty()){
+            obs.setText(e.getEquipamentoRet().getObs());
+        }
+        tipo.setText(e.getEquipamentoRet().getTipo().toString());
+        especificacao.setText(e.getEquipamentoRet().getEquipamentoBase().getEspecificacao());
+        textQuant.setText("Quantidade: ");
+        emprestadoPara.setText(String.valueOf(e.getQuantidade()));
+    }
+
+    private void organizarInfoEquiEmp(Equipamento equipamento) {
+        EquipamentoEmprestimo e = service.buscarEquipamentoEmprestimo(equipamento.getId(), equipamento.getCodigo());
+        //Optional<EquipamentoEmprestimo> e = service.findById(this.id);
+        pat.setText(e.getEquipamentoEmp().getCodigo());
+        nome.setText(e.getEquipamentoEmp().getEquipamentoBase().getNome());
+        modelo.setText(e.getEquipamentoEmp().getEquipamentoBase().getModelo());
+        if(obs.getText().isEmpty()){
+            obs.setText(e.getEquipamentoEmp().getObs());
+        }
+        tipo.setText(e.getEquipamentoEmp().getTipo().toString());
+        especificacao.setText(e.getEquipamentoEmp().getEquipamentoBase().getEspecificacao());
+        Emprestimo emprestimo = emprestimoService.emprestimoAberto(e);
         if(emprestimo != null){
             emprestadoPara.setText(emprestimo.getPessoa().getNome());
         }else{
             emprestadoPara.setText("N/A");
         }
     }
-
 
 
 }

@@ -70,4 +70,15 @@ public class EmprestimoService {
         return repository.findById(id);
     }
 
+    public List<Emprestimo> listarEmpPorData(LocalDate now) {
+        return repository.findByDataEmprestimo(now);
+    }
+
+    public List<Emprestimo> listarEmpPorSolicitante(String text) {
+        return repository.findAllByPessoaNomeContainingIgnoreCase(text);
+    }
+
+    public List<Emprestimo> listarPorPatEqui(String text) {
+        return repository.findAllByEquipamentoEquipamentoEmpCodigoContainingIgnoreCase(text);
+    }
 }

@@ -1,14 +1,21 @@
 package com.projeto.domRio1.doRio.controller;
 
+import com.projeto.domRio1.doRio.controller.elementos.telaInit.Tabelainit;
 import com.projeto.domRio1.doRio.controller.elementos.telaPessoa.CadastroPessoaController;
 import com.projeto.domRio1.doRio.controller.elementos.telaPessoa.TabelaPessoa;
+import com.projeto.domRio1.doRio.model.EquipamentoEmprestimo;
 import com.projeto.domRio1.doRio.model.Pessoa;
 import com.projeto.domRio1.doRio.service.DepartamentoService;
 import com.projeto.domRio1.doRio.service.pessoa.PessoaService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +30,7 @@ import java.util.List;
 public class SolicitanteController {
 
     @FXML
-    private VBox pessoaTabela;
+    private ListView<Pessoa> pessoaListView;
 
     @Autowired
     private PessoaService pessoaService;
@@ -47,38 +54,41 @@ public class SolicitanteController {
         configurarTabela();
     }
 
+
+
     public void configurarTabela() {
-        pessoaTabela.getChildren().clear();
-        List<Pessoa> pessoas = new ArrayList<>(pessoaService.listarTodos());
-        boolean corColuna = false;
-        for (Pessoa p : pessoas){
+        ObservableList<Pessoa> observableList = FXCollections.observableArrayList(pessoaService.listarTodos());
+        pessoaListView.setItems(observableList);
 
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/templates/views/tabelas/TabelaPessoa.fxml"));
-            try {
-                // Carregar o layout correto baseado no tipo do FXML
-                Node node = fxmlLoader.load();  // Usando Node genérico
-                // Obtendo o controller para setar os dados
-                TabelaPessoa ps = fxmlLoader.getController();
-                ps.setData(p);
-                //ps.meuService(this.equiEmpretimoService);
-                ps.meuService(this.pessoaService);
+        pessoaListView.setCellFactory(list -> new ListCell<>() {
+            private FXMLLoader loader;
 
-                // Alternando cores para cada linha
-
-                if (corColuna) {
-                    node.setStyle("-fx-background-color: lightgray;"); // Cor para linhas ímpares
+            @Override
+            protected void updateItem(Pessoa item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
                 } else {
-                    node.setStyle("-fx-background-color: white;"); // Cor para linhas pares
-                }
+                    if (loader == null) {
+                        loader = new FXMLLoader(getClass().getResource("/templates/views/tabelas/TabelaPessoa.fxml"));
+                        try {
+                            setGraphic(loader.load());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            setGraphic(new Label("Erro ao carregar"));
+                            return;
+                        }
+                    }
 
-                // Alternar o valor de isEvenRow para a próxima iteração
-                corColuna = !corColuna;
-                // Adicionando o node carregado ao container (ex: VBox ou HBox)
-                pessoaTabela.getChildren().add(node);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+
+                    TabelaPessoa ps = loader.getController();
+                    ps.setData(item);
+                    //ps.meuService(this.equiEmpretimoService);
+                    ps.meuService(pessoaService);
+
+                }
             }
-        }
+        });
     }
 }

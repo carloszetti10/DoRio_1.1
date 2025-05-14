@@ -8,12 +8,15 @@ import com.projeto.domRio1.doRio.service.EquipamentoEmprestimoService;
 import com.projeto.domRio1.doRio.service.EquipamentoRetiradaService;
 import com.projeto.domRio1.doRio.service.EquipamentoService;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,12 +35,18 @@ public class EquipamentoController {
     EquipamentoRetiradaService equipamentoRetiradaService;
     @Autowired
     EquipamentoService equipamentoService;
+    EquipamentoController controller = EquipamentoController.this;
 
 
-    private static List<?> listaGeral = new ArrayList<>();
+    //private static List<?> listaGeral = new ArrayList<>();
+
+
 
     @FXML
-    private VBox equipamentoTabela;
+    private ListView<EquipamentoEmprestimo> equipamentoListView;
+    @FXML
+    private ListView<EquipamentoRetirada> equipamentoListViewRet;
+
     @FXML
     private ComboBox<TipoEquipamento> tipoEquiCombo;
     @FXML
@@ -52,13 +61,16 @@ public class EquipamentoController {
     @FXML
     void tipoEquiEventoCombo(ActionEvent event) {
         if(tipoEquiCombo.getValue() == TipoEquipamento.RETIRADA){
-            listaGeral = equipamentoRetiradaService.listarTodos();
             statuQuant.setText("QUANTIDADE");
-            configurarTabela();
+            configurarTabela(equipamentoRetiradaService.listarTodos());
+            equipamentoListViewRet.setVisible(true);
+            equipamentoListView.setVisible(false);
         } else {
-            listaGeral = equiEmpretimoService.listarTodos();
+            equiEmpretimoService.listarTodos();
             statuQuant.setText("STATUS");
-            configurarTabela();
+            configurarTabela(equiEmpretimoService.listarTodos());
+            equipamentoListViewRet.setVisible(false);
+            equipamentoListView.setVisible(true);
         }
     }
     @FXML
@@ -69,7 +81,27 @@ public class EquipamentoController {
     }
 
 
-    public void configurarTabela() {
+
+    public void configurarTabela(List<?> lista) {
+        List<Object> equipamentos = new ArrayList<>(lista);
+        Object primeiro = null;
+
+        if (!equipamentos.isEmpty()) {
+            primeiro = equipamentos.get(0);
+            if (primeiro.getClass().getName().equals(EquipamentoEmprestimo.class.getName())) {
+                configurarTabEquiEmprestimo(equipamentos);
+            } else if (primeiro.getClass().getName().equals(EquipamentoRetirada.class.getName())) {
+                configurarTabEquiRetirada(equipamentos);
+            }
+        }
+    }
+
+
+
+
+
+
+    /*public void configurarTabela1() {
         equipamentoTabela.getChildren().clear();
         List<Object> equipamentos = new ArrayList<>(listaGeral);
         Object primeiro = null;
@@ -149,5 +181,76 @@ public class EquipamentoController {
             System.out.println("Tipo: " + primeiro.getClass().getName());
         }
 
+    }*/
+
+
+
+
+    public void configurarTabEquiEmprestimo(List<?> listaEqui) {
+        List<EquipamentoEmprestimo> equipamentos = (List<EquipamentoEmprestimo>) listaEqui;
+        ObservableList<EquipamentoEmprestimo> observableList = FXCollections.observableArrayList(equipamentos);
+
+        equipamentoListView.setItems(observableList);
+
+        equipamentoListView.setCellFactory(list -> new ListCell<>() {
+            @Override
+            protected void updateItem(EquipamentoEmprestimo item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/templates/views/tabelas/TabelaInit.fxml"));
+                        Node graphic = loader.load();
+
+                        Tabelainit ps = loader.getController();
+                        ps.setData(item);
+                        ps.meuService(equiEmpretimoService, equipamentoService, controller);
+                        //ps.setVisibleBotao();
+
+                        setGraphic(graphic);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        setGraphic(new Label("Erro ao carregar"));
+                    }
+                }
+            }
+        });
     }
+
+    public void configurarTabEquiRetirada(List<?> listaEqui) {
+        equipamentoListViewRet.setVisible(false);
+        List<EquipamentoRetirada> equipamentos = (List<EquipamentoRetirada>) listaEqui;
+        ObservableList<EquipamentoRetirada> observableList = FXCollections.observableArrayList(equipamentos);
+
+        equipamentoListViewRet.setItems(observableList);
+
+        equipamentoListViewRet.setCellFactory(list -> new ListCell<>() {
+            @Override
+            protected void updateItem(EquipamentoRetirada item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/templates/views/tabelas/TabelaInit.fxml"));
+                        Node graphic = loader.load();
+
+                        Tabelainit ps = loader.getController();
+                        ps.setDataReirada(item);
+                        ps.meuService(equiEmpretimoService, equipamentoService, controller);
+                        //ps.setVisibleBotao();
+
+                        setGraphic(graphic);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        setGraphic(new Label("Erro ao carregar"));
+                    }
+                }
+            }
+        });
+    }
+
 }

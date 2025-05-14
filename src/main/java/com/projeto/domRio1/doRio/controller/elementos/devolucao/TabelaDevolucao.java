@@ -66,13 +66,13 @@ public class TabelaDevolucao {
         Optional<Emprestimo> e = emprestimoService.findById(id);
         String equi = e.get().getEquipamento().getEquipamentoEmp().getEquipamentoBase().getNome()+" "+ e.get().getEquipamento().getEquipamentoEmp().getCodigo();
 
-        boolean botao = CaixaDialogo.mostrarDialogoOpcao("Confirmação", "", "Deseja realmente Realizar devolução do Equipamento: " + equi);
-
+        boolean botao = CaixaDialogo.mostrarDialogoOpcao("Confirmação", "", "Deseja realmente Realizar devolução do Equipamento: " + equi + "?");
         try {
             if(botao){
                 Set<Emprestimo> lista = new HashSet<>();
                 lista.add(e.get());
                 devolucaoService.devolver(lista);
+                CaixaDialogo.mostrarDialogoSucesso("Sucesso", "", "Devolução cadastrada!");
             }
         } catch (ErroException ex) {
             CaixaDialogo.mostrarDialogoErro("Erro", "", "Não foi possível registrar a devolução!");

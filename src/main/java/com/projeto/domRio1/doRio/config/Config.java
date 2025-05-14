@@ -29,7 +29,7 @@ public class Config {
             u.setUsuarioLogar("adm");
             u.setSenha("adm");
             u.setTipo(TipoUsuario.Administrador);
-            cadastrarEquipamentosEmprestimo();
+            //cadastrarEquipamentosEmprestimo();
 
             Optional<Usuario> usuario = service.getUsuario(u.getUsuarioLogar());
             if (!usuario.isPresent()){

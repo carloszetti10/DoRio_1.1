@@ -31,10 +31,6 @@ public class TabelaPessoa {
 
     }
 
-    @FXML
-    void excluir(ActionEvent event) {
-
-    }
 
     @FXML
     void informacao(ActionEvent event) {

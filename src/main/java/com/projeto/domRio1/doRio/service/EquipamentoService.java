@@ -141,4 +141,8 @@ public class EquipamentoService {
         }
         return existe;
     }
+
+    public List<Equipamento> listaEquiTipoEmprestimo(TipoEquipamento tipo) {
+        return equipamentoRepository.findAllByTipo(tipo);
+    }
 }

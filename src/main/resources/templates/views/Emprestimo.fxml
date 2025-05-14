@@ -10,8 +10,9 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="content-view" stylesheets="@style/application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.EmprestimoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="content-view" stylesheets="@style/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.EmprestimoController">
    <children>
       <HBox>
          <children>
@@ -31,21 +32,17 @@
                         <Insets right="600.0" />
                      </HBox.margin>
                   </Button>
-                  <ComboBox prefHeight="27.0" prefWidth="200.0">
+                  <ComboBox fx:id="comboPesquisa" onAction="#comboEvent" prefHeight="27.0" prefWidth="262.0">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <TextField prefHeight="27.0" prefWidth="206.0" promptText="Product Name">
+                  <TextField fx:id="campoPesquisa" onKeyTyped="#campoPesquisaCombo" prefHeight="27.0" prefWidth="230.0" promptText="Pesquisar">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" styleClass="wid-120" text="SEARCH">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
+                  <SVGPath content="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" />

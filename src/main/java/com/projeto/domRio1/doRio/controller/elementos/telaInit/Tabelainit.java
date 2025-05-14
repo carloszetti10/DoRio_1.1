@@ -49,6 +49,9 @@ public class Tabelainit {
     private Label id;
 
     @FXML
+    private Label idEquiBase;
+
+    @FXML
     private Label modelo;
 
     @FXML
@@ -73,7 +76,7 @@ public class Tabelainit {
             if(SessaoUsuario.getUsuario().getTipo() == TipoUsuario.Administrador ){
                 boolean confirmacao = CaixaDialogo.mostrarDialogoOpcao("Confirmação", "", "Deseja realmente apagar esse equipamento?");
                 if (confirmacao){
-                    Optional<Equipamento> byId = equipamentoService.findById(Long.valueOf(this.id.getText()));
+                    Optional<Equipamento> byId = equipamentoService.findById(Long.valueOf(this.idEquiBase.getText()));
                     equipamentoService.setarApagado(byId.get());
                     CaixaDialogo.mostrarDialogoSucesso("Sucesso", "", "Equipamento Apagado com sucesso!");
                     equipamentoController.initialize();
@@ -125,11 +128,12 @@ public class Tabelainit {
     }
 
     void abrirTelaInfo(){
-        InformacaoEquiController.addNew(this.id.getText(), this.equiEmpretimoService);
+        InformacaoEquiController.addNew(this.idEquiBase.getText(), this.equiEmpretimoService, this.equiRetiradaService, this.equipamentoService);
     }
 
     public void setData(EquipamentoEmprestimo ep) {
         id.setText(String.valueOf(ep.getId()));
+        idEquiBase.setText(String.valueOf(ep.getEquipamentoEmp().getId()));
         codigo.setText(ep.getEquipamentoEmp().getCodigo());
         modelo.setText(ep.getEquipamentoEmp().getEquipamentoBase().getModelo());
         nomeEqui.setText(ep.getEquipamentoEmp().getEquipamentoBase().getNome());
@@ -157,6 +161,7 @@ public class Tabelainit {
 
     public void setDataReirada(EquipamentoRetirada ep) {
         id.setText(String.valueOf(ep.getId()));
+        idEquiBase.setText(String.valueOf(ep.getEquipamentoRet().getId()));
         codigo.setText(ep.getEquipamentoRet().getCodigo());
         modelo.setText(ep.getEquipamentoRet().getEquipamentoBase().getModelo());
         nomeEqui.setText(ep.getEquipamentoRet().getEquipamentoBase().getNome());

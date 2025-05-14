@@ -1,5 +1,6 @@
 package com.projeto.domRio1.doRio.service;
 
+import com.projeto.domRio1.doRio.model.EquiBase;
 import com.projeto.domRio1.doRio.model.Equipamento;
 import com.projeto.domRio1.doRio.model.EquipamentoEmprestimo;
 import com.projeto.domRio1.doRio.repository.EquipamentoEmprestimoRepository;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,5 +71,24 @@ public class EquipamentoEmprestimoService {
     public void atualizarEquiDevolvido(EquipamentoEmprestimo equipamento) {
         equipamento.setDisponivel(true);
         repository.save(equipamento);
+    }
+
+
+    public List<EquipamentoEmprestimo> listarEquiEmpPorEquiBase(EquiBase value) {
+        return repository.findByEquipamentoEmpEquipamentoBaseAndEquipamentoEmpApagadoFalse(value);
+    }
+
+
+    public List<EquipamentoEmprestimo> pesquisar(String text, EquiBase value) {
+        List<EquipamentoEmprestimo> list = List.of();
+        if (!text.trim().isEmpty() && value != null) {
+            list = repository.findByEquipamentoEmpEquipamentoBaseAndEquipamentoEmpCodigoAndEquipamentoEmpApagadoFalse(value, text);
+        } else if (text.trim().isEmpty()) {
+            list = repository.findByEquipamentoEmpEquipamentoBaseAndEquipamentoEmpApagadoFalse(value);
+        } else if (value == null) {
+            list = repository.findByEquipamentoEmpCodigoContainingIgnoreCaseAndEquipamentoEmpApagadoFalse(text);
+        }
+        return list;
+
     }
 }

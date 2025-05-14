@@ -38,25 +38,25 @@ public class DevolucaoController {
 
     @FXML
     void abrirDialogoDevolucao(ActionEvent event) {
-        Set<Emprestimo> lista = TabelaDevolucao.emprestimoLista;
-
-        for (Emprestimo l : lista){
-            System.out.println(l.toString());
-        }
-        if(lista != null && !lista.isEmpty()){
-            boolean confirmação = CaixaDialogo.mostrarDialogoOpcao("Confirmação", "", "");
-
-            if(confirmação){
-                devolucaoService.devolver(lista);
+        try{
+            Set<Emprestimo> lista = TabelaDevolucao.emprestimoLista;
+            for (Emprestimo l : lista){
+                System.out.println(l.toString());
             }
-
-        }else {
-            CaixaDialogo.mostrarDialogoAviso("Aviso", "","Selecione uma devolução para cadastrar!");
+            if(lista != null && !lista.isEmpty()){
+                boolean confirmacao = CaixaDialogo.mostrarDialogoOpcao("Confirmação", "", "Deseja realizar a devolução?");
+                if(confirmacao){
+                    devolucaoService.devolver(lista);
+                    CaixaDialogo.mostrarDialogoSucesso("Sucesso", "", "Devolução cadastrada!");
+                }
+            }else {
+                CaixaDialogo.mostrarDialogoAviso("Aviso", "","Selecione uma devolução para cadastrar!");
+            }
+            configurarTabela();
+            TabelaDevolucao.emprestimoLista.removeAll(lista);
+        }catch (Exception ex){
+            CaixaDialogo.mostrarDialogoErro("Erro", "", "Não foi possível registrar a devolução!");
         }
-
-        configurarTabela();
-        TabelaDevolucao.emprestimoLista.removeAll(lista);
-
 
     }
 

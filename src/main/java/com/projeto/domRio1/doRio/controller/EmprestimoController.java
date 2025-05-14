@@ -7,6 +7,7 @@ import com.projeto.domRio1.doRio.service.EquiBaseService;
 import com.projeto.domRio1.doRio.service.EquipamentoEmprestimoService;
 import com.projeto.domRio1.doRio.service.EquipamentoService;
 import com.projeto.domRio1.doRio.service.pessoa.PessoaService;
+import com.projeto.domRio1.doRio.utils.CaixaDialogo;
 import javafx.application.Application;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,14 +18,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 @Controller
@@ -79,9 +85,15 @@ public class EmprestimoController implements Initializable {
         FormEmprestimo.addNew(this.emprestimoService, this.equiEmprestimoService, this.pessoaService, this.equipamentoService, this.equiBase, telaInitController, null, this);
     }
 
+    @FXML
+    private TextField campoPesquisa;
+
+    @FXML
+    private ComboBox<String> comboPesquisa;
 
 
-   public void configurarTabela() {
+
+   public void configurarTabela(List<Emprestimo> emp) {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -156,14 +168,47 @@ public class EmprestimoController implements Initializable {
        });
 
         // Carregar dados na tabela
-        ObservableList<Emprestimo> emprestimos = FXCollections.observableArrayList(
-                emprestimoService.todosEmprestimo() // Método que retorna a lista de empréstimos
-        );
+        ObservableList<Emprestimo> emprestimos = FXCollections.observableArrayList(emp);
         tableView.setItems(emprestimos);
-    }
+   }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        configurarTabela();
+        configurarTabela(emprestimoService.todosEmprestimo());
+        preencherComboPesquisa();
+        campoPesquisa.setVisible(false);
+    }
+
+    @FXML
+    void campoPesquisaCombo(KeyEvent event) {
+       String campo = comboPesquisa.getValue();
+       if (campo.equals("SOLICITANTE")){
+           configurarTabela(emprestimoService.listarEmpPorSolicitante(campoPesquisa.getText()));
+       }else if (campo.equals("PAT EQUIPAMENTO")) {
+           configurarTabela(emprestimoService.listarPorPatEqui(campoPesquisa.getText()));
+       }
+    }
+    void preencherComboPesquisa(){
+        List<String> stringValor = List.of("TODOS", "SOLICITANTE", "PAT EQUIPAMENTO");
+        comboPesquisa.getItems().clear();
+        comboPesquisa.setValue("TODOS");
+        comboPesquisa.getItems().addAll(stringValor);
+    }
+    @FXML
+    void comboEvent(ActionEvent event) {
+       if (!Objects.equals(comboPesquisa.getValue(), "TODOS")){
+           campoPesquisa.setVisible(true);
+           campoPesquisa.setText("");
+       } else {
+           configurarTabela(emprestimoService.todosEmprestimo());
+           campoPesquisa.setVisible(false);
+       }
+    }
+
+
+
+    public void abrirEmprestimoTelaInicial(List<Emprestimo> emprestimos) {
+       configurarTabela(emprestimos);
+       comboPesquisa.setValue("");
     }
 }
