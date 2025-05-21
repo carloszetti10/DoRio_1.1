@@ -17,4 +17,7 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
     List<Emprestimo> findAllByPessoaNomeContainingIgnoreCase(String text);
 
     List<Emprestimo> findAllByEquipamentoEquipamentoEmpCodigoContainingIgnoreCase(String text);
+
+
+    List<Emprestimo> findAllByEquipamentoEquipamentoEmpCodigoContaining(String text);
 }

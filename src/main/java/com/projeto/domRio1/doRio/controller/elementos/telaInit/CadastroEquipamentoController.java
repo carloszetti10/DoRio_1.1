@@ -1,5 +1,6 @@
 package com.projeto.domRio1.doRio.controller.elementos.telaInit;
 
+import com.projeto.domRio1.doRio.controller.EquipamentoController;
 import com.projeto.domRio1.doRio.controller.TelaInitController;
 import com.projeto.domRio1.doRio.exception.AvisoException;
 import com.projeto.domRio1.doRio.exception.ErroException;
@@ -34,6 +35,7 @@ public class CadastroEquipamentoController {
     private Consumer<EquiBase> saveHandler;
     private Consumer<NumeroComEqui> equipamentoConsumer;
     private TelaInitController telaInitController;
+    EquipamentoController equipamentoController;
 
     @FXML
     private Pane painelCadEquipamento;
@@ -103,6 +105,7 @@ public class CadastroEquipamentoController {
             limpaCampoInicial();
             mensagemPane.mostrarSucesso("Equipamento cadastrado com sucesso!");
             capturarTipoAbrirQuantidade();
+            equipamentoController.setarTipoCombo(TipoEquipamento.RETIRADA);
         } catch (ErroException erroException) {
             mensagemPane.mostrarErro(erroException.getMessage());
         } catch (AvisoException e) {
@@ -147,11 +150,11 @@ public class CadastroEquipamentoController {
         stage.close();
     }
 
-    public static void addNew(Consumer<NumeroComEqui> equipamentoConsumer, Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui, Supplier<List<EquiBase>> listaEquipamento,TelaInitController telaInit) {
-        abrir(null, equipamentoConsumer, saveHandler, tipoEqui,listaEquipamento,telaInit);
+    public static void addNew(Consumer<NumeroComEqui> equipamentoConsumer, Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui, Supplier<List<EquiBase>> listaEquipamento,TelaInitController telaInit, EquipamentoController equipamentoController) {
+        abrir(null, equipamentoConsumer, saveHandler, tipoEqui,listaEquipamento,telaInit, equipamentoController);
     }
 
-    public static void abrir(EquiBase e,Consumer<NumeroComEqui> equipamentoConsumer,  Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui,Supplier<List<EquiBase>> listaEquipamento, TelaInitController telaInit) {
+    public static void abrir(EquiBase e,Consumer<NumeroComEqui> equipamentoConsumer,  Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui,Supplier<List<EquiBase>> listaEquipamento, TelaInitController telaInit, EquipamentoController equipamentoController) {
         try {
             Stage stage = new Stage(StageStyle.UNDECORATED);
             FXMLLoader loader = new FXMLLoader(CadastroEquipamentoController.class.getResource("/templates/views/caixa/FormEquipamento.fxml"));
@@ -159,7 +162,7 @@ public class CadastroEquipamentoController {
             stage.initModality(Modality.APPLICATION_MODAL);
 
             CadastroEquipamentoController controller = loader.getController();
-            controller.init(e, equipamentoConsumer, saveHandler,tipoEqui,listaEquipamento,telaInit);
+            controller.init(e, equipamentoConsumer, saveHandler,tipoEqui,listaEquipamento,telaInit, equipamentoController);
 
 
             stage.show();
@@ -180,12 +183,13 @@ public class CadastroEquipamentoController {
         comboTipoEquiBase.getItems().addAll(TipoEquipamento.values());
     }
 
-    private void init( EquiBase e,Consumer<NumeroComEqui> equipamentoConsumer,Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui, Supplier<List<EquiBase>> listaEquipamento,TelaInitController telaInit) {
+    private void init( EquiBase e,Consumer<NumeroComEqui> equipamentoConsumer,Consumer<EquiBase> saveHandler, TipoEquipamento[] tipoEqui, Supplier<List<EquiBase>> listaEquipamento,TelaInitController telaInit, EquipamentoController equipamentoController) {
 
         this.telaInitController = telaInit;
         this.equipamentoConsumer = equipamentoConsumer;
         this.saveHandler = saveHandler;
         comboTipo.getItems().addAll(tipoEqui);
+        this.equipamentoController = equipamentoController;
         preencherComboEqui(List.of());
         preencherComboTipoEqui();
         comboEqui.setConverter(new StringConverter<EquiBase>() {
@@ -204,7 +208,7 @@ public class CadastroEquipamentoController {
     }
 
     public static void configurarSpinner(Spinner<Integer> spinner) {
-        int minValue = 1;
+        int minValue = 0;
         int maxValue = 100_000;
 
         // Configura a fábrica de valores do Spinner com valor inicial 1

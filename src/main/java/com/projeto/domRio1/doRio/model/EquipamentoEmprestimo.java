@@ -1,10 +1,7 @@
 package com.projeto.domRio1.doRio.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -33,4 +30,13 @@ public class EquipamentoEmprestimo {
     //@JoinColumn(name = "id_tipo_equi")
     //private EquiBase tipoModelo;
 
+
+    @Override
+    public String toString() {
+        return "EquipamentoEmprestimo{" +
+                "id=" + id +
+                ", equipamentoEmp=" + equipamentoEmp +
+                ", disponivel=" + disponivel +
+                '}';
+    }
 }

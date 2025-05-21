@@ -64,18 +64,13 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" onAction="#abrirCadastro" prefHeight="30.0" prefWidth="100.0" styleClass="botao-salvar">
+                              <Button mnemonicParsing="false" onAction="#abrirCadastro" prefHeight="30.0" prefWidth="222.0" styleClass="botao-salvar">
                                  <HBox.margin>
                                     <Insets bottom="10.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <SVGPath content="M22 11.5v3c0 0.828-0.672 1.5-1.5 1.5h-6.5v6.5c0 0.828-0.672 1.5-1.5 1.5h-3c-0.828 0-1.5-0.672-1.5-1.5v-6.5h-6.5c-0.828 0-1.5-0.672-1.5-1.5v-3c0-0.828 0.672-1.5 1.5-1.5h6.5v-6.5c0-0.828 0.672-1.5 1.5-1.5h3c0.828 0 1.5 0.672 1.5 1.5v6.5h6.5c0.828 0 1.5 0.672 1.5 1.5z" fill="WHITE" />
                                  </graphic>
-                              </Button>
-                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="botao-atualizar" text="EMPRESTAR">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" />
-                                 </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
@@ -86,15 +81,7 @@
                                     <Font name="Corbel Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="32.0" prefWidth="171.0" promptText="Product Name" />
-                              <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0">
-                                 <graphic>
-                                    <SVGPath content="M22 11.5v3c0 0.828-0.672 1.5-1.5 1.5h-6.5v6.5c0 0.828-0.672 1.5-1.5 1.5h-3c-0.828 0-1.5-0.672-1.5-1.5v-6.5h-6.5c-0.828 0-1.5-0.672-1.5-1.5v-3c0-0.828 0.672-1.5 1.5-1.5h6.5v-6.5c0-0.828 0.672-1.5 1.5-1.5h3c0.828 0 1.5 0.672 1.5 1.5v6.5h6.5c0.828 0 1.5 0.672 1.5 1.5z" fill="#3e89f2" />
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Button>
+                              <TextField fx:id="campoPesquisar" onKeyTyped="#campoPesquisaKey" prefHeight="32.0" prefWidth="218.0" promptText="Pesquisar patrimônio " />
                            </children>
                         </HBox>
                         <ListView fx:id="equipamentoListView" layoutY="93.0" prefHeight="566.0" prefWidth="1140.0" />

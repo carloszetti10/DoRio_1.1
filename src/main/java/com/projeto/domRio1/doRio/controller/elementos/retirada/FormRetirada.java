@@ -101,7 +101,7 @@ public class FormRetirada {
             listaPatrimonio.removeAll(listaPatrimonio);
             preencherEquipamento();
             configurarTabela();
-            retiradaController.configurarTabela();
+            retiradaController.configurarTabela(retiradaService.todosEmprestimo());
 
         } catch (ErroException erroException) {
             mensagemPane.mostrarErro(erroException.getMessage());
@@ -209,7 +209,7 @@ public class FormRetirada {
     }
 
     void preencherEquipamento(){
-        List<EquiBase> equiBases = equiBase.buscarTodos();
+        List<EquiBase> equiBases = equiBase.buscarTodosEquiTipo(TipoEquipamento.RETIRADA);
         equipamento.getItems().clear();
         equipamento.getItems().addAll(equiBases);
         equipamento.setConverter(new StringConverter<EquiBase>() {

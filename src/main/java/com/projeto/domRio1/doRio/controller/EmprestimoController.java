@@ -205,8 +205,6 @@ public class EmprestimoController implements Initializable {
        }
     }
 
-
-
     public void abrirEmprestimoTelaInicial(List<Emprestimo> emprestimos) {
        configurarTabela(emprestimos);
        comboPesquisa.setValue("");

@@ -78,7 +78,7 @@ public class TabelaDevolucao {
             CaixaDialogo.mostrarDialogoErro("Erro", "", "Não foi possível registrar a devolução!");
         }
 
-        devolucaoController.configurarTabela();
+        devolucaoController.configurarTabela(emprestimoService.emprestimosPendentes());
 
     }
 

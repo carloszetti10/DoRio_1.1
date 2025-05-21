@@ -18,6 +18,7 @@ public class Equipamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String codigo;
 
     @ManyToOne
@@ -36,10 +37,5 @@ public class Equipamento {
 
     @OneToMany(mappedBy = "equipamentoRet", fetch = FetchType.EAGER)
     private List<EquipamentoRetirada> equipamentosRetirada = new ArrayList<>();
-
-
-
-
-    
 
 }

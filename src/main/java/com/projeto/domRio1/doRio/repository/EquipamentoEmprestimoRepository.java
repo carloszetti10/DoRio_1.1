@@ -23,7 +23,7 @@ public interface EquipamentoEmprestimoRepository extends JpaRepository<Equipamen
 
     List<EquipamentoEmprestimo> findByEquipamentoEmpEquipamentoBaseAndEquipamentoEmpCodigo(EquiBase value, String text);
 
-    List<EquipamentoEmprestimo> findByEquipamentoEmpCodigoContainingIgnoreCase(String text);
+    List<EquipamentoEmprestimo> findAllByEquipamentoEmpApagadoFalseAndEquipamentoEmpCodigoContainingIgnoreCase(String text);
 
     List<EquipamentoEmprestimo> findByEquipamentoEmpEquipamentoBaseAndEquipamentoEmpApagadoFalse(EquiBase value);
 

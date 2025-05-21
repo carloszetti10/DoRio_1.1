@@ -145,4 +145,28 @@ public class EquipamentoService {
     public List<Equipamento> listaEquiTipoEmprestimo(TipoEquipamento tipo) {
         return equipamentoRepository.findAllByTipo(tipo);
     }
+
+    @Transactional
+    public void editar(Equipamento equi, String tObs, int quant) {
+        try {
+            Equipamento ed = new Equipamento();
+            ed.setId(equi.getId());
+            ed.setApagado(equi.isApagado());
+            ed.setCodigo(equi.getCodigo());
+            ed.setObs(tObs);
+            ed.setEquipamentoBase(equi.getEquipamentoBase());
+            ed.setTipo(equi.getTipo());
+            equipamentoRepository.save(ed);
+            if(equi.getTipo() == TipoEquipamento.RETIRADA){
+                EquipamentoRetirada retirada = equiRetirada.buscarEquipamentoRetirada(equi.getId(), equi.getCodigo());
+                int quantAt = retirada.getQuantidade() + quant;
+
+                retirada.setEquipamentoRet(ed);
+                retirada.setQuantidade(quantAt);
+                equiRetirada.editar(retirada);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Não foi possível editar o equipamento.");
+        }
+    }
 }

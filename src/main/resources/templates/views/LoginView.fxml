@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane stylesheets="@style/application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.LoginController">
+<AnchorPane stylesheets="@style/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projeto.domRio1.doRio.controller.LoginController">
    <children>
        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
          <left>
@@ -37,7 +37,7 @@
                   </Button>
                        <Text fill="#272b3f" layoutX="158.0" layoutY="159.0" text="Login">
                            <font>
-                               <Font size="18.0" />
+                               <Font name="System Bold" size="18.0" />
                            </font>
                        </Text>
                   <Button layoutX="360.0" layoutY="8.0" mnemonicParsing="false" onAction="#close" prefHeight="41.0" prefWidth="38.0" styleClass="btnFechar" text="X">
@@ -47,17 +47,17 @@
                   </Button>
                   <AnchorPane layoutX="165.0" layoutY="109.0" prefHeight="31.0" prefWidth="29.0">
                      <children>
-                        <SVGPath content="M28 15.5v-13c0-0.266-0.234-0.5-0.5-0.5h-25c-0.266 0-0.5 0.234-0.5 0.5v13c0 0.266 0.234 0.5 0.5 0.5h25c0.266 0 0.5-0.234 0.5-0.5zM30 2.5v17c0 1.375-1.125 2.5-2.5 2.5h-8.5c0 1.328 1 2.453 1 3s-0.453 1-1 1h-8c-0.547 0-1-0.453-1-1 0-0.578 1-1.641 1-3h-8.5c-1.375 0-2.5-1.125-2.5-2.5v-17c0-1.375 1.125-2.5 2.5-2.5h25c1.375 0 2.5 1.125 2.5 2.5z" />
+                        <SVGPath content="M16 16a6 6 0 1 0-6-6 6 6 0 0 0 6 6zm0 2c-4.4 0-13 2.2-13 6.5V28h26v-3.5c0-4.3-8.6-6.5-13-6.5zM24 16a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-16 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4M16 16a6 6 0 1 0-6-6 6 6 0 0 0 6 6zm0 2c-4.4 0-13 2.2-13 6.5V28h26v-3.5c0-4.3-8.6-6.5-13-6.5zM24 16a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-16 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4z" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="84.0" layoutY="207.0" prefHeight="31.0" prefWidth="29.0">
+                  <AnchorPane layoutX="68.0" layoutY="207.0" prefHeight="31.0" prefWidth="25.0">
                      <children>
-                        <SVGPath content="M28 15.5v-13c0-0.266-0.234-0.5-0.5-0.5h-25c-0.266 0-0.5 0.234-0.5 0.5v13c0 0.266 0.234 0.5 0.5 0.5h25c0.266 0 0.5-0.234 0.5-0.5zM30 2.5v17c0 1.375-1.125 2.5-2.5 2.5h-8.5c0 1.328 1 2.453 1 3s-0.453 1-1 1h-8c-0.547 0-1-0.453-1-1 0-0.578 1-1.641 1-3h-8.5c-1.375 0-2.5-1.125-2.5-2.5v-17c0-1.375 1.125-2.5 2.5-2.5h25c1.375 0 2.5 1.125 2.5 2.5z" />
+                        <SVGPath content="M16 16c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0 4c-5.33 0-16 2.668-16 8v4h32v-4c0-5.332-10.67-8-16-8z" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="84.0" layoutY="260.0" prefHeight="31.0" prefWidth="29.0">
+                  <AnchorPane layoutX="69.0" layoutY="260.0" prefHeight="22.0" prefWidth="24.0">
                      <children>
-                        <SVGPath content="M28 15.5v-13c0-0.266-0.234-0.5-0.5-0.5h-25c-0.266 0-0.5 0.234-0.5 0.5v13c0 0.266 0.234 0.5 0.5 0.5h25c0.266 0 0.5-0.234 0.5-0.5zM30 2.5v17c0 1.375-1.125 2.5-2.5 2.5h-8.5c0 1.328 1 2.453 1 3s-0.453 1-1 1h-8c-0.547 0-1-0.453-1-1 0-0.578 1-1.641 1-3h-8.5c-1.375 0-2.5-1.125-2.5-2.5v-17c0-1.375 1.125-2.5 2.5-2.5h25c1.375 0 2.5 1.125 2.5 2.5z" />
+                        <SVGPath content="M15.75 1.5a6.75 6.75 0 0 0-6.651 7.906c.067.39-.032.717-.221.906l-6.5 6.499a3 3 0 0 0-.878 2.121v2.818c0 .414.336.75.75.75H6a.75.75 0 0 0 .75-.75v-1.5h1.5A.75.75 0 0 0 9 19.5V18h1.5a.75.75 0 0 0 .53-.22l2.658-2.658c.19-.189.517-.288.906-.22A6.75 6.75 0 1 0 15.75 1.5Zm0 3a.75.75 0 0 0 0 1.5A2.25 2.25 0 0 1 18 8.25a.75.75 0 0 0 1.5 0 3.75 3.75 0 0 0-3.75-3.75Z" />
                      </children>
                   </AnchorPane>
                    </children>

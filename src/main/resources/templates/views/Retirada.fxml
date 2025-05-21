@@ -31,21 +31,16 @@
                                 <Insets right="600.0" />
                             </HBox.margin>
                         </Button>
-                        <ComboBox prefHeight="27.0" prefWidth="200.0">
+                        <ComboBox fx:id="comboPesquisa" onAction="#comboEvent" prefHeight="27.0" prefWidth="268.0">
                             <HBox.margin>
                                 <Insets right="5.0" />
                             </HBox.margin>
                         </ComboBox>
-                        <TextField prefHeight="27.0" prefWidth="206.0" promptText="Product Name">
+                        <TextField fx:id="campoPesquisa" onKeyTyped="#campoPesquisaCombo" prefHeight="27.0" prefWidth="244.0" promptText="pesquisa">
                             <HBox.margin>
                                 <Insets right="5.0" />
                             </HBox.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" styleClass="wid-120" text="SEARCH">
-                            <HBox.margin>
-                                <Insets />
-                            </HBox.margin>
-                        </Button>
                     </children>
                     <VBox.margin>
                   <Insets bottom="5.0" />

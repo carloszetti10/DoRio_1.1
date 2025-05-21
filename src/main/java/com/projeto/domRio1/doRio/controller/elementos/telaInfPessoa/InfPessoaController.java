@@ -1,15 +1,21 @@
 package com.projeto.domRio1.doRio.controller.elementos.telaInfPessoa;
 
 import com.projeto.domRio1.doRio.controller.elementos.telaInit.CadastroEquipamentoController;
+import com.projeto.domRio1.doRio.controller.elementos.telaInit.Tabelainit;
 import com.projeto.domRio1.doRio.model.Emprestimo;
+import com.projeto.domRio1.doRio.model.EquipamentoEmprestimo;
 import com.projeto.domRio1.doRio.model.Pessoa;
 import com.projeto.domRio1.doRio.service.pessoa.PessoaService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,8 +29,9 @@ import java.util.Optional;
 
 @Controller
 public class InfPessoaController {
+
     @FXML
-    private VBox emprestimoInfoPessoas;
+    private ListView<Emprestimo> listView;
     @FXML
     private Label nomeSolicitante;
 
@@ -81,36 +88,40 @@ public class InfPessoaController {
 
 
     public void configurarTabela() {
-        emprestimoInfoPessoas.getChildren().clear();
-        List<Emprestimo> emprestimos = new ArrayList<>(pessoaService.todosEmprestimoNaoDevolvido(this.id));
-        boolean corColuna = false;
-        for (Emprestimo e : emprestimos){
+        ObservableList<Emprestimo> observableList = FXCollections.observableArrayList(pessoaService.todosEmprestimoNaoDevolvido(this.id));
+        listView.setItems(observableList);
 
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/templates/views/tabelas/TabelaInfPessoa.fxml"));
-            try {
-                // Carregar o layout correto baseado no tipo do FXML
-                Node node = fxmlLoader.load();  // Usando Node genérico
-                // Obtendo o controller para setar os dados
-                TabelaInfPessoa ps = fxmlLoader.getController();
-                ps.setDadosEmprestimo(e);
-                //ps.meuService(this.equiEmpretimoService);
+        listView.setCellFactory(list -> new ListCell<>() {
+            private FXMLLoader loader;
 
-                // Alternando cores para cada linha
-
-                if (corColuna) {
-                    node.setStyle("-fx-background-color: lightgray;"); // Cor para linhas ímpares
+            @Override
+            protected void updateItem(Emprestimo item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
                 } else {
-                    node.setStyle("-fx-background-color: white;"); // Cor para linhas pares
-                }
+                    if (loader == null) {
+                        loader = new FXMLLoader(getClass().getResource("/templates/views/tabelas/TabelaInfPessoa.fxml"));
+                        try {
+                            setGraphic(loader.load());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            setGraphic(new Label("Erro ao carregar"));
+                            return;
+                        }
+                    }
 
-                // Alternar o valor de isEvenRow para a próxima iteração
-                corColuna = !corColuna;
-                // Adicionando o node carregado ao container (ex: VBox ou HBox)
-                emprestimoInfoPessoas.getChildren().add(node);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                    TabelaInfPessoa ps = loader.getController();
+                    ps.setDadosEmprestimo(item);
+                    // Alterna cor de fundo
+                    //if (getIndex() % 2 == 0) {
+                    // getGraphic().setStyle("-fx-background-color: white;");
+                    //} else {
+                    //getGraphic().setStyle("-fx-background-color: lightgray;");
+                    // }
+                }
             }
-        }
+        });
     }
 }

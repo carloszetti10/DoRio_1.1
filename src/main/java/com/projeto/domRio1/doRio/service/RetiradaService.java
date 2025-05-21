@@ -61,5 +61,15 @@ public class RetiradaService {
         return repository.findAll();
     }
 
+    public List<Retirada> retiradaHoje(LocalDate hoje){
+        return repository.findAllByDataRetirada(hoje);
+    }
 
+    public List<Retirada> listarEmpPorSolicitante(String text) {
+        return repository.findAllBySolicitanteNomeContainingIgnoreCase(text);
+    }
+
+    public List<Retirada> listarPorPatEqui(String text) {
+        return  repository.findAllByEquipamentoEquipamentoRetCodigoContainingIgnoreCase(text);
+    }
 }

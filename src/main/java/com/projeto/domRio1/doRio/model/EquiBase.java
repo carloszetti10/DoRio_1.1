@@ -18,10 +18,14 @@ public class EquiBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private String modelo;
     private String especificacao;
     private Integer quantidade;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoEquipamento tipo;
 

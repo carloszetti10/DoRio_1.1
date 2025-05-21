@@ -9,6 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -34,7 +38,7 @@ public class DevolucaoController {
     private DevolucaoController thisController;
 
     @FXML
-    private VBox devolucaoTabela;
+    private ListView<Emprestimo> devolucaoTabela;
 
     @FXML
     void abrirDialogoDevolucao(ActionEvent event) {
@@ -52,7 +56,7 @@ public class DevolucaoController {
             }else {
                 CaixaDialogo.mostrarDialogoAviso("Aviso", "","Selecione uma devolução para cadastrar!");
             }
-            configurarTabela();
+            configurarTabela(emprestimoService.emprestimosPendentes());
             TabelaDevolucao.emprestimoLista.removeAll(lista);
         }catch (Exception ex){
             CaixaDialogo.mostrarDialogoErro("Erro", "", "Não foi possível registrar a devolução!");
@@ -62,41 +66,49 @@ public class DevolucaoController {
 
     @FXML
     public void initialize() {
-        configurarTabela();
+        configurarTabela(emprestimoService.emprestimosPendentes());
     }
-    public void configurarTabela() {
-        devolucaoTabela.getChildren().clear();
-        List<Emprestimo> emprestimos = new ArrayList<>(emprestimoService.emprestimosPendentes());
-        boolean corColuna = false;
-        for (Emprestimo ep : emprestimos) {
+    public void configurarTabela(List<Emprestimo> lista) {
 
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/templates/views/tabelas/TabelaDevolucao.fxml"));
-            try {
-                // Carregar o layout correto baseado no tipo do FXML
-                Node node = fxmlLoader.load();  // Usando Node genérico
-                // Obtendo o controller para setar os dados
-                TabelaDevolucao ps = fxmlLoader.getController();
-                ps.setData(ep);
-                ps.meusServices(devolucaoService, emprestimoService,thisController);
-                // Alternando cores para cada linha
+        devolucaoTabela.setCellFactory(list -> new ListCell<>() {
+            private FXMLLoader loader;
 
-                if (corColuna) {
-                    node.setStyle("-fx-background-color: lightgray;"); // Cor para linhas ímpares
+            @Override
+            protected void updateItem(Emprestimo emprestimo, boolean empty) {
+                super.updateItem(emprestimo, empty);
+                if (empty || emprestimo == null) {
+                    setText(null);
+                    setGraphic(null);
                 } else {
-                    node.setStyle("-fx-background-color: white;"); // Cor para linhas pares
+                    if (loader == null) {
+                        loader = new FXMLLoader(getClass().getResource("/templates/views/tabelas/TabelaDevolucao.fxml"));
+                        try {
+                            setGraphic(loader.load());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    TabelaDevolucao ps = loader.getController();
+                    ps.setData(emprestimo);
+                    ps.meusServices(devolucaoService, emprestimoService,thisController);
                 }
-
-                // Alternar o valor de isEvenRow para a próxima iteração
-                corColuna = !corColuna;
-                // Adicionando o node carregado ao container (ex: VBox ou HBox)
-                devolucaoTabela.getChildren().add(node);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
-        }
+        });
+
+        devolucaoTabela.getItems().clear();
+        // Adicionar
+        devolucaoTabela.getItems().addAll(
+               lista
+        );
     }
 
-    public static void devolverEvent() {
+    @FXML
+    private TextField campoPesquisa;
+
+    @FXML
+    void campoPesquisaKey(KeyEvent event) {
+        String text = campoPesquisa.getText();
+        configurarTabela(devolucaoService.listaPorPar(text));
     }
+
 }

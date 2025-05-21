@@ -63,6 +63,7 @@ public class Tabelainit {
 
     @FXML
     void editar(ActionEvent event) {
+        InformacaoEquiController.addNew(this.idEquiBase.getText(), this.equiEmpretimoService, this.equiRetiradaService, this.equipamentoService, true, equipamentoController);
     }
 
     @FXML
@@ -128,7 +129,7 @@ public class Tabelainit {
     }
 
     void abrirTelaInfo(){
-        InformacaoEquiController.addNew(this.idEquiBase.getText(), this.equiEmpretimoService, this.equiRetiradaService, this.equipamentoService);
+        InformacaoEquiController.addNew(this.idEquiBase.getText(), this.equiEmpretimoService, this.equiRetiradaService, this.equipamentoService, false, equipamentoController);
     }
 
     public void setData(EquipamentoEmprestimo ep) {
@@ -154,6 +155,7 @@ public class Tabelainit {
         this.equipamentoService = equipamentoService;
         this.equipamentoController = equipamentoController;
         this.equiRetiradaService = equiRetiradaService;
+        //this.equipamentoController = equipamentoController;
     }
 
 
@@ -177,6 +179,10 @@ public class Tabelainit {
     public void setVisibleBotao(){
         botaoEditar.setVisible(false);
         botaoExcluir.setVisible(false);
+    }
+
+    public void setVisibleCaixa(){
+        caixaButton.setVisible(false);
     }
 }
 

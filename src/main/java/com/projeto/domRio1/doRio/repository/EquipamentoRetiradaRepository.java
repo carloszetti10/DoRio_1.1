@@ -4,10 +4,12 @@ package com.projeto.domRio1.doRio.repository;
 import com.projeto.domRio1.doRio.model.Equipamento;
 import com.projeto.domRio1.doRio.model.EquipamentoEmprestimo;
 import com.projeto.domRio1.doRio.model.EquipamentoRetirada;
+import com.projeto.domRio1.doRio.model.Retirada;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EquipamentoRetiradaRepository extends JpaRepository<EquipamentoRetirada, Long> {
@@ -18,4 +20,6 @@ public interface EquipamentoRetiradaRepository extends JpaRepository<Equipamento
 
 
     List<EquipamentoRetirada> findAllByEquipamentoRetApagadoFalse();
+
+    List<EquipamentoRetirada> findAllByEquipamentoRetApagadoFalseAndEquipamentoRetCodigoContainingIgnoreCase(String text);
 }
